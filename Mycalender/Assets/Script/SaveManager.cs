@@ -32,13 +32,14 @@ public class SaveManager : MonoBehaviour
         Plan plan = new Plan();
 
         plan.setplanname("make curry");
-        plan.setplandate(DateTime.Now.ToString("yyyy/MM/dd"));
+        plan.setstartdate(DateTime.Now.ToString("yyyy/MM/dd"));
+        plan.setfinishdate(DateTime.Now.AddDays(1).ToString("yyyy/MM/dd"));
         PlanList.planlist[0] = plan;
         savePlanData(PlanList.planlist[0]);
         Plan plan2 = loadPlanData();
         Debug.Log(plan2.getplanname());
-        Debug.Log(plan2.getplandate());
-
+        Debug.Log(plan2.getstartdate());
+        Debug.Log(plan2.getfinishdate());
 
     }
 }

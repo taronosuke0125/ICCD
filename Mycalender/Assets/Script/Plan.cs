@@ -1,12 +1,15 @@
 using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using System;
 
 public class Plan
 {
-    public string planname;
-    public string plandate;
+    public string planname;//—\’è‚Ì–¼‘O
+    public string startdate;//—\’è‚ÌŠJn
+    public string finishdate;//—\’è‚ÌI—¹
+    public string plandetail;//—\’è‚ÌÚ×
 
     public void setplanname(string name)
     {
@@ -16,17 +19,28 @@ public class Plan
     {
         return planname;
     }
-   public void setplandate(string date)
+   public void setstartdate(string date)
     {
-        plandate = date;
+        startdate = date;
     }
-    public string getplandate()
+
+    public void setfinishdate(string date)
     {
-        return plandate;
+        finishdate = date;
     }
-    public void setplan(Plan plan1)
+
+    public DateTime getstartdate()
     {
-        setplanname(plan1.planname);
-        setplandate(plan1.plandate);
+        return DateTime.Parse(startdate);
+    }
+    public DateTime getfinishdate()
+    {
+        return DateTime.Parse(finishdate);
+    }
+    public void setplan(string name,string start,string finish)
+    {
+        setplanname(name);
+        setstartdate(start);
+        setfinishdate(finish);
     }
 }
