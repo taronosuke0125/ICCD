@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlanDetail.unity
     guid: 13ad1cfb866544e43ad95de24b3a1ad7
+<<<<<<< Updated upstream
+=======
+  - enabled: 1
+    path: Assets/Scenes/New Scene.unity
+    guid: 0bdc7e338be89c94286cfe3fe80b151a
+>>>>>>> Stashed changes
   m_configObjects: {}
