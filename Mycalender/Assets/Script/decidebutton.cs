@@ -7,8 +7,7 @@ using System.IO;
 
 public class decidebutton : MonoBehaviour
 {
-    DateTime starttime=setstartday.starttime;
-    DateTime finish= setstartday.finish;
+  
     public class Data
     {
      public int StartY;
@@ -21,6 +20,8 @@ public class decidebutton : MonoBehaviour
     // Start is called before the first frame update
     public void OnClickdecideButton()
     {
+        DateTime starttime = setstartday.starttime;
+        DateTime finish = setstartday.finish;
         Data schedule = new Data();
         schedule.StartY = int.Parse(starttime.ToString("yyyy"));
         schedule.StartM = int.Parse(starttime.ToString("MM"));

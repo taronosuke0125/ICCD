@@ -38,6 +38,8 @@ public class setstartday : MonoBehaviour
              DAY2.GetComponent<Text>().text = now.ToString("yyyy/MM/dd");
              finish =now;
         }
+        Debug.Log("start:" + starttime);
+        Debug.Log("finish:" + finish);
        
         
     }
