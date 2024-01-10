@@ -10,6 +10,7 @@ public class decidebutton : MonoBehaviour
   
     public class Data
     {
+     public string Name;
      public int StartY;
      public int StartM;
      public int StartD;
@@ -23,6 +24,7 @@ public class decidebutton : MonoBehaviour
         DateTime starttime = setstartday.starttime;
         DateTime finish = setstartday.finish;
         Data schedule = new Data();
+        schedule.Name = setstartday.planname;
         schedule.StartY = int.Parse(starttime.ToString("yyyy"));
         schedule.StartM = int.Parse(starttime.ToString("MM"));
         schedule.StartD = int.Parse(starttime.ToString("dd"));
@@ -35,8 +37,7 @@ public class decidebutton : MonoBehaviour
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine(jsonschedule);
         writer.Close();
-
-
+        InputPlantitle.DeleteNameStatic();
         SceneManager.LoadScene("Calender");
     }
 }

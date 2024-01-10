@@ -12,6 +12,7 @@ public class setstartday : MonoBehaviour
     DateTime Date= makecalender.ChangeDate;
     public static DateTime starttime;
     public static DateTime finish;
+    public static string planname="blank";
     // Start is called before the first frame update
     void Start()
     {
@@ -38,10 +39,5 @@ public class setstartday : MonoBehaviour
              DAY2.GetComponent<Text>().text = now.ToString("yyyy/MM/dd");
              finish =now;
         }
-        Debug.Log("start:" + starttime);
-        Debug.Log("finish:" + finish);
-       
-        
     }
-
 }
