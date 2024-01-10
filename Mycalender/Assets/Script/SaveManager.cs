@@ -5,6 +5,7 @@ using System;
 using System.IO;
 public class SaveManager : MonoBehaviour
 {
+   /*
     public void savePlanData(Plan plan)
     {
         StreamWriter writer;
@@ -42,4 +43,5 @@ public class SaveManager : MonoBehaviour
         Debug.Log(plan2.getfinishdate());
 
     }
+   */
 }

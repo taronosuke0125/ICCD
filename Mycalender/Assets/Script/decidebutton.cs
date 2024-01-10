@@ -7,17 +7,6 @@ using System.IO;
 
 public class decidebutton : MonoBehaviour
 {
-  
-    public class Data
-    {
-     public string Name;
-     public int StartY;
-     public int StartM;
-     public int StartD;
-     public int FinishY;
-     public int FinishM;
-     public int FinishD;
-    }
     // Start is called before the first frame update
     public void OnClickdecideButton()
     {
