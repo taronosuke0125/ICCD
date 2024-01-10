@@ -13,13 +13,17 @@ public class Data
     public int FinishY;
     public int FinishM;
     public int FinishD;
+    public DateTime Start;
+    public DateTime Finish;
     public void view()
     {
         Debug.Log("Name:" + Name + ", StartY:" + StartY + ", StartM:" + StartM + ", StartD:" + StartD + ", FinishY:" + FinishY + ", FinishM:" + FinishM + ", FinishD:" + FinishD);
     }
-}
-public class DataPro : Data
-{
-    public DateTime Start;
-    public DateTime Finish;
+    //•ª‚©‚ê‚Ä‚¢‚é”N,ŒŽ,“ú‚ðDateTimeŒ^‚É•ÏŠ·
+    public void IntToString()
+    {
+        Start = new DateTime(StartY, StartM, StartD);
+        Finish = new DateTime(FinishY, FinishM, FinishD);
+    }
+
 }

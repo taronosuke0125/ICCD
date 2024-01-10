@@ -569,6 +569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6219657982090464632}
+  - component: {fileID: 6697126633168814941}
   m_Layer: 0
   m_Name: Buttons
   m_TagString: Untagged
@@ -597,3 +598,15 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6697126633168814941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7055856806149072528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb4a35bd365d9154f9288bf70251d180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -21,7 +21,6 @@ public class decidebutton : MonoBehaviour
         schedule.FinishM = int.Parse(finish.ToString("MM"));
         schedule.FinishD = int.Parse(finish.ToString("dd"));
         string jsonschedule = JsonUtility.ToJson(schedule);
-        Debug.Log(jsonschedule);
         string path = Application.dataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine(jsonschedule);
