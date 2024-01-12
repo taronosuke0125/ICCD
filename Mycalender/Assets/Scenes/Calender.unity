@@ -616,7 +616,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.5
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 100
   m_Viewport: {fileID: 0}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 0}
@@ -765,11 +765,11 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 200
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
+  m_ChildControlHeight: 1
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
@@ -785,6 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f6282c5df623b4eb9fdaeeed3dcfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantext: {fileID: 7954170421698952834, guid: d64956e65ccc2a4429a1a9f630c099c0, type: 3}
   canvas: {fileID: 595627825}
   prefab: {fileID: 7055856806149072528, guid: c8dccd064ff26714d9d89ad790764a3f, type: 3}
   Title: {fileID: 833217444}

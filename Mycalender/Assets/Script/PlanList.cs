@@ -5,8 +5,8 @@ using System.IO;
 using Newtonsoft.Json;
 public class PlanList : MonoBehaviour
 {
-    public static Data[] DataList=new Data[99];
-    public static int datacount;
+    public static Data[] DataList=new Data[99];//—\’è‚ÌƒŠƒXƒg
+    public static int datacount;//—\’è‚ÌŒÂ”
    
     public void LoadPlan()
     {
@@ -30,6 +30,7 @@ public class PlanList : MonoBehaviour
         int count = 0;
         while (DataList[count] != null)
         {
+            DataList[count].view();
             DataList[count].IntToString();
             count++;
         }
