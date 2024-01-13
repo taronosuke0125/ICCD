@@ -199,6 +199,6 @@ public class CreateDate : MonoBehaviour
     public void ToDetailScene(DateTime date)
     {
         ToDate = date;
-        SceneManager.LoadScene("PlanDetail");
+        SceneManager.LoadScene("detail");
     }
 }
