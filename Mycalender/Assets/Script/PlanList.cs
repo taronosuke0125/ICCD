@@ -8,7 +8,7 @@ public class PlanList : MonoBehaviour
     public static Data[] DataList=new Data[99];//—\’è‚ÌƒŠƒXƒg
     public static int datacount;//—\’è‚ÌŒÂ”
    
-    public void LoadPlan()
+    public static void LoadPlan()
     {
         string datastr = "";
         StreamReader reader;
@@ -19,21 +19,25 @@ public class PlanList : MonoBehaviour
         {
             datastr = reader.ReadLine();//ˆês‚¸‚Â“Ç‚Ş
             DataList[datacount]=JsonConvert.DeserializeObject<Data>(datastr);//—\’è‚ğ—\’èƒŠƒXƒg‚É“o˜^
+            DataList[datacount].IntToString();
             datacount++;
         }
         reader.Close();
     }
+
+    public static void viewPlan()
+    {
+        int i;
+        Debug.Log("datacount:"+datacount);
+        for (i = 0; i < datacount; i++)
+            DataList[i].view();
+    }
+
+
     private void Start()
     {
         //Å‰‚Ésavedata‚ğ“Ç‚İ‚İƒŠƒXƒg‚ğì¬‚·‚é
         LoadPlan();
-        int count = 0;
-        while (DataList[count] != null)
-        {
-            DataList[count].view();
-            DataList[count].IntToString();
-            count++;
-        }
-        
+        viewPlan();
     }
 }
