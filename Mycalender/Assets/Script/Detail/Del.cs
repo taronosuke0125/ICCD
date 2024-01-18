@@ -8,6 +8,7 @@ public class Del : MonoBehaviour
     //ボタンを押したときに呼び出す(1/14更新)
     public void Pushdel(){
        DeletePlan();
+        Debug.Log("pushdel");
     } 
     //予定を削除
     public void DeletePlan()
