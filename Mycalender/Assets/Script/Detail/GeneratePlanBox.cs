@@ -17,8 +17,4 @@ public class GeneratePlanBox : MonoBehaviour
             Debug.Log("this Detail Number:"+planbox.GetComponent<DetailNumber>().detailnumber);
         }
     }
-    void Update()
-    {
-        
-    }
 }
