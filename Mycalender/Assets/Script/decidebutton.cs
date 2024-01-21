@@ -35,12 +35,8 @@ public class decidebutton : MonoBehaviour
         DateTime finish = setstartday.finish;
         Data schedule = new Data();
         schedule.Name = setstartday.planname;
-        schedule.StartY = int.Parse(starttime.ToString("yyyy"));
-        schedule.StartM = int.Parse(starttime.ToString("MM"));
-        schedule.StartD = int.Parse(starttime.ToString("dd"));
-        schedule.FinishY = int.Parse(finish.ToString("yyyy"));
-        schedule.FinishM = int.Parse(finish.ToString("MM"));
-        schedule.FinishD = int.Parse(finish.ToString("dd"));
+        schedule.Startstr = starttime.ToString("yyyy/MM/dd/ HH:mm:ss");
+        schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
         string jsonschedule = JsonUtility.ToJson(schedule);
         string path = Application.dataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
         StreamWriter writer = new StreamWriter(path, true);
@@ -54,12 +50,8 @@ public class decidebutton : MonoBehaviour
         DateTime finish = setstartday.finish;
         Data schedule = new Data();
         schedule.Name = setstartday.planname;
-        schedule.StartY = int.Parse(starttime.ToString("yyyy"));
-        schedule.StartM = int.Parse(starttime.ToString("MM"));
-        schedule.StartD = int.Parse(starttime.ToString("dd"));
-        schedule.FinishY = int.Parse(finish.ToString("yyyy"));
-        schedule.FinishM = int.Parse(finish.ToString("MM"));
-        schedule.FinishD = int.Parse(finish.ToString("dd"));
+        schedule.Startstr = starttime.ToString("yyyy/MM/dd/ t");
+        schedule.Finishstr = finish.ToString("yyyy/MM/dd/ t");
         string jsonschedule = JsonUtility.ToJson(schedule);
         int count = 0;
         //ファイルのパス

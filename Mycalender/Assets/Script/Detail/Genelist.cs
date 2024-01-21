@@ -8,7 +8,7 @@ public class Genelist : MonoBehaviour
      private const string PASSWORD_CHARS = 
         "0123456789abcdefghijklmnopqrstuvwxyz";
 
-    public static bool open = false;
+    public bool open = false;
     [SerializeField]
     public GameObject obj;//詳細パネルオブジェクト
     
