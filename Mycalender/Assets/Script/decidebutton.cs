@@ -40,7 +40,7 @@ public class decidebutton : MonoBehaviour
         schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
         schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
         string jsonschedule = JsonUtility.ToJson(schedule);
-        string path = Application.dataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
+        string path = Application.persistentDataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine(jsonschedule);
         writer.Close();
@@ -62,7 +62,7 @@ public class decidebutton : MonoBehaviour
         string jsonschedule = JsonUtility.ToJson(schedule);
         int count = 0;
         //ファイルのパス
-        string filePath = Application.dataPath + "/savedata.json";
+        string filePath = Application.persistentDataPath+ "/savedata.json";
         //ファイルを読み込みで開く
         System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
         //一時ファイルを作成する
