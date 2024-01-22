@@ -31,27 +31,34 @@ public class decidebutton : MonoBehaviour
     //予定をjsonファイルに登録する
     private void RegistPlan()
     {
-        DateTime starttime = setstartday.starttime;
+        DateTime start = setstartday.starttime;
         DateTime finish = setstartday.finish;
+        start += TimeSpan.Parse(Timetext.starttime);
+        finish += TimeSpan.Parse(Timetext.finishtime);
         Data schedule = new Data();
         schedule.Name = setstartday.planname;
-        schedule.Startstr = starttime.ToString("yyyy/MM/dd/ HH:mm:ss");
+        schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
         schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
         string jsonschedule = JsonUtility.ToJson(schedule);
         string path = Application.dataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine(jsonschedule);
         writer.Close();
+        //予定を登録したら時間を初期化
+        Timetext.starttime = "00:00";
+        Timetext.finishtime = "00:00";
     }
     //1/16更新 jsonファイルn行目の予定を書き換える
     private void EditPlan(int n)
     {
-        DateTime starttime = setstartday.starttime;
+        DateTime start = setstartday.starttime;
         DateTime finish = setstartday.finish;
+        start += TimeSpan.Parse(Timetext.starttime);
+        finish += TimeSpan.Parse(Timetext.finishtime);
         Data schedule = new Data();
         schedule.Name = setstartday.planname;
-        schedule.Startstr = starttime.ToString("yyyy/MM/dd/ t");
-        schedule.Finishstr = finish.ToString("yyyy/MM/dd/ t");
+        schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
+        schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
         string jsonschedule = JsonUtility.ToJson(schedule);
         int count = 0;
         //ファイルのパス
@@ -84,5 +91,8 @@ public class decidebutton : MonoBehaviour
         //一時ファイルと入れ替える
         System.IO.File.Copy(tmpPath, filePath, true);
         System.IO.File.Delete(tmpPath);
+        //予定を登録したら時間を初期化
+        Timetext.starttime = "00:00";
+        Timetext.finishtime = "00:00";
     }
 }

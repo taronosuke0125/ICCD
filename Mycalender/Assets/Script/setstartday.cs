@@ -42,6 +42,8 @@ public class setstartday : MonoBehaviour
             //•ÒW‰æ–Ê‚Æ‚µ‚Ä—˜—p‚·‚é‚Æ‚«
             DAY.GetComponent<Text>().text = starttime.ToString("yyyy/MM/dd");
             DAY2.GetComponent<Text>().text = finish.ToString("yyyy/MM/dd");
+            Timetext.starttime=starttime.ToString("HH:mm");
+            Timetext.finishtime = finish.ToString("HH:mm");
         }
         else if(flug == 4)
         {

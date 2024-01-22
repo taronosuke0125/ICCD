@@ -69,11 +69,11 @@ public class CreateDate : MonoBehaviour
             Debug.Log("Sel:"+SelectDate);
             Debug.Log("S:" + PlanList.DataList[i].Start);
             Debug.Log("F:" + PlanList.DataList[i].Finish);
-            if (PlanList.DataList[i].Finish < SelectDate.Date || SelectDate.AddDays(7).Date < PlanList.DataList[i].Start)
+            if (PlanList.DataList[i].Finish <= SelectDate.Date || SelectDate.AddDays(7).Date <= PlanList.DataList[i].Start)
             {//—\’è‚ª•\Ž¦‚³‚ê‚Ä‚¢‚é7“úŠÔ‚ÌŠÔ‚É‚È‚¢Žž
                 Debug.Log("Case1");
                 continue;
-            }else if (PlanList.DataList[i].Start < SelectDate.Date)
+            }else if (PlanList.DataList[i].Start <= SelectDate.Date)
             {//—\’èŠJŽn“ú‚ªæ“ª‚Ì“ú•t‚Ì00:00‚æ‚è‚à‘O
                 if(PlanList.DataList[i].Finish <= SelectDate.AddDays(7).Date)
                 {//—\’èI—¹“ú‚ªÅŒã”ö‚Ì“ú•t+1‚Ì00:00ˆÈ‘O
@@ -85,7 +85,7 @@ public class CreateDate : MonoBehaviour
                         GameObject planname = Instantiate(plantext, planview.transform);
                         planname.GetComponent<Text>().text = PlanList.DataList[i].Name;
                         j++;
-                    } while ( SelectDate.Date.AddDays(j) <= PlanList.DataList[i].Finish);
+                    } while ( SelectDate.Date.AddDays(j) < PlanList.DataList[i].Finish);
                 }
                 else
                 {//—\’èI—¹“ú‚ªÅŒã”ö‚æ‚èŒã
@@ -101,12 +101,12 @@ public class CreateDate : MonoBehaviour
             }
             else
             {//—\’èŠJŽn“ú‚ªæ“ª‚Ì“ú•t‚Ì00:00ˆÈ~
-                if (PlanList.DataList[i].Finish < SelectDate.AddDays(7).Date)
+                if (PlanList.DataList[i].Finish <= SelectDate.AddDays(7).Date)
                 {//—\’èI—¹“ú‚ªÅŒã”ö‚Ì“ú•tˆÈ‘O
                     Debug.Log("Case5");
                     int j = 0;
                     //—\’èŠJŽn“ú‚ªæ“ª‚Ì“ú•t‚©‚ç‰½”Ô–Ú‚©
-                    while(SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start)
+                    while(SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start.Date)
                     {
                         j++;
                     }
@@ -117,7 +117,7 @@ public class CreateDate : MonoBehaviour
                         GameObject planname = Instantiate(plantext, planview.transform);
                         planname.GetComponent<Text>().text = PlanList.DataList[i].Name;
                         j++;
-                    } while (SelectDate.Date.AddDays(j) <= PlanList.DataList[i].Finish);
+                    } while (SelectDate.Date.AddDays(j) < PlanList.DataList[i].Finish);
                 }
                 else
                 {//—\’èI—¹“ú‚ªÅŒã”ö‚æ‚èŒã
