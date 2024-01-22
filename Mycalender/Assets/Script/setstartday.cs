@@ -31,7 +31,23 @@ public class setstartday : MonoBehaviour
              DAY2.GetComponent<Text>().text = Date.ToString("yyyy/MM/dd");
              finish =Date;
         }
-        else
+        else if(flug == 3)
+        {
+            //•ÒW‘O‚Ì—\’è“ú’ö‚ğ“o˜^
+            Data p1 = PlanList.DataList[Edit.changenumber];
+            Debug.Log("changing date");
+            p1.view();
+            starttime = p1.Start;
+            finish = p1.Finish;
+            //•ÒW‰æ–Ê‚Æ‚µ‚Ä—˜—p‚·‚é‚Æ‚«
+            DAY.GetComponent<Text>().text = starttime.ToString("yyyy/MM/dd");
+            DAY2.GetComponent<Text>().text = finish.ToString("yyyy/MM/dd");
+        }
+        else if(flug == 4)
+        {
+            //
+        }
+        else 
         {
              Debug.Log(flug);
              DAY.GetComponent<Text>().text = now.ToString("yyyy/MM/dd");

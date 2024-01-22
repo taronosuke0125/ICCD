@@ -69,14 +69,14 @@ public class CreateDate : MonoBehaviour
             Debug.Log("Sel:"+SelectDate);
             Debug.Log("S:" + PlanList.DataList[i].Start);
             Debug.Log("F:" + PlanList.DataList[i].Finish);
-            if (PlanList.DataList[i].Finish < SelectDate.Date || SelectDate.AddDays(6).Date < PlanList.DataList[i].Start)
+            if (PlanList.DataList[i].Finish < SelectDate.Date || SelectDate.AddDays(7).Date < PlanList.DataList[i].Start)
             {//予定が表示されている7日間の間にない時
                 Debug.Log("Case1");
                 continue;
             }else if (PlanList.DataList[i].Start < SelectDate.Date)
-            {//予定開始日が先頭の日付よりも前
-                if(PlanList.DataList[i].Finish <= SelectDate.AddDays(6).Date)
-                {//予定終了日が最後尾の日付以前
+            {//予定開始日が先頭の日付の00:00よりも前
+                if(PlanList.DataList[i].Finish <= SelectDate.AddDays(7).Date)
+                {//予定終了日が最後尾の日付+1の00:00以前
                     Debug.Log("Case2");
                     int j = 0;
                     do
@@ -100,8 +100,8 @@ public class CreateDate : MonoBehaviour
                 }
             }
             else
-            {//予定開始日が先頭の日付以降
-                if (PlanList.DataList[i].Finish <= SelectDate.AddDays(6).Date)
+            {//予定開始日が先頭の日付の00:00以降
+                if (PlanList.DataList[i].Finish < SelectDate.AddDays(7).Date)
                 {//予定終了日が最後尾の日付以前
                     Debug.Log("Case5");
                     int j = 0;
@@ -124,7 +124,7 @@ public class CreateDate : MonoBehaviour
                     Debug.Log("Case3");
                     int j = 0;
                     //予定開始日が先頭の日付から何番目か
-                    while (SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start)
+                    while (SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start.Date)
                     {
                         j++;
                     }
@@ -199,6 +199,6 @@ public class CreateDate : MonoBehaviour
     public void ToDetailScene(DateTime date)
     {
         ToDate = date;
-        SceneManager.LoadScene("PlanDetail");
+        SceneManager.LoadScene("detail");
     }
 }
