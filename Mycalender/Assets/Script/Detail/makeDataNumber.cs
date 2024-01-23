@@ -23,7 +23,7 @@ public class makeDataNumber : MonoBehaviour
         Listcount = 0;
         for(i=0; i<PlanList.datacount; i++)
         {
-            if (PlanList.DataList[i].Start <=CreateDate.ToDate.Date && CreateDate.ToDate.Date <= PlanList.DataList[i].Finish)
+            if (PlanList.DataList[i].Start.Date <=CreateDate.ToDate.Date && CreateDate.ToDate.Date <= PlanList.DataList[i].Finish.Date)
             {
                 PlanNumberList[Listcount++] = i;
                 Debug.Log("PlanNumber:"+i);

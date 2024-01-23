@@ -785,7 +785,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f6282c5df623b4eb9fdaeeed3dcfe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantext: {fileID: 7954170421698952834, guid: d64956e65ccc2a4429a1a9f630c099c0, type: 3}
+  planpanel: {fileID: 4015043518950414976, guid: caf74e317c0eccb4f8fb64f0720ec19c, type: 3}
   canvas: {fileID: 595627825}
   prefab: {fileID: 7055856806149072528, guid: c8dccd064ff26714d9d89ad790764a3f, type: 3}
   Title: {fileID: 833217444}
@@ -869,7 +869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.9168335}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.11602783}
+  m_AnchoredPosition: {x: 0, y: -0.1159668}
   m_SizeDelta: {x: 0, y: 0.23209}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &833217446
