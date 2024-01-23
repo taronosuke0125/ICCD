@@ -14,6 +14,7 @@ public class CreateDate : MonoBehaviour
     //w’è‚µ‚½“ú‚©‚çµ“úŠÔ‚ğ•\¦‚·‚éŠÖ”
     private void CalenderController(DateTime headdate)
     {   D_Date = headdate;
+        Debug.Log(D_Date);
         for (int i = 0; i < 7; i++)
         {
             if (i == 0)
@@ -65,10 +66,10 @@ public class CreateDate : MonoBehaviour
         }
         for (i=0; i<PlanList.datacount; i++)
         {
-            Debug.Log(i);
-            Debug.Log("Sel:"+SelectDate);
-            Debug.Log("S:" + PlanList.DataList[i].Start);
-            Debug.Log("F:" + PlanList.DataList[i].Finish);
+            //Debug.Log(i);
+            //Debug.Log("Sel:"+SelectDate);
+            //Debug.Log("S:" + PlanList.DataList[i].Start);
+            //Debug.Log("F:" + PlanList.DataList[i].Finish);
             if (PlanList.DataList[i].Finish <= SelectDate.Date || SelectDate.AddDays(7).Date <= PlanList.DataList[i].Start)
             {//—\’è‚ª•\¦‚³‚ê‚Ä‚¢‚é7“úŠÔ‚ÌŠÔ‚É‚È‚¢
                 Debug.Log("Case1");

@@ -11,7 +11,7 @@ public class decidebutton : MonoBehaviour
     public static bool inedit=false;
     public void OnClickdecideButton()
     {
-        Debug.Log(inedit);
+        //Debug.Log(inedit);
         if (inedit)
         {//予定編集時
             EditPlan(Edit.changenumber);
@@ -31,10 +31,14 @@ public class decidebutton : MonoBehaviour
     //予定をjsonファイルに登録する
     private void RegistPlan()
     {
-        DateTime start = setstartday.starttime;
-        DateTime finish = setstartday.finish;
+        DateTime start = setstartday.starttime.Date;
+        DateTime finish = setstartday.finish.Date;
+        Debug.Log("Start:"+start);
+        Debug.Log("Finish:" + finish);
         start += TimeSpan.Parse(Timetext.starttime);
         finish += TimeSpan.Parse(Timetext.finishtime);
+        Debug.Log("Startex:" + start);
+        Debug.Log("Finishex:" + finish);
         Data schedule = new Data();
         schedule.Name = setstartday.planname;
         schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
@@ -51,8 +55,8 @@ public class decidebutton : MonoBehaviour
     //1/16更新 jsonファイルn行目の予定を書き換える
     private void EditPlan(int n)
     {
-        DateTime start = setstartday.starttime;
-        DateTime finish = setstartday.finish;
+        DateTime start = setstartday.starttime.Date;
+        DateTime finish = setstartday.finish.Date;
         start += TimeSpan.Parse(Timetext.starttime);
         finish += TimeSpan.Parse(Timetext.finishtime);
         Data schedule = new Data();
