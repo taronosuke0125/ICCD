@@ -1,24 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GeneratePlanBox : MonoBehaviour
 {
-    //“o˜^‚³‚ê‚½—\’è‚Ì˜a‚¾‚¯—\’è‚Ìƒ{ƒbƒNƒX‚ğì¬
+    //ï¿½oï¿½^ï¿½ï¿½ï¿½ê‚½ï¿½\ï¿½ï¿½Ì˜aï¿½ï¿½ï¿½ï¿½ï¿½\ï¿½ï¿½Ìƒ{ï¿½bï¿½Nï¿½Xï¿½ï¿½ï¿½ì¬
     public GameObject canvas;
     public GameObject prefab;
     void Start()
     {
-        //“o˜^‚³‚ê‚½—\’è‚Ì”‚¾‚¯detailƒvƒŒƒnƒu‚ğì¬
+        //ï¿½oï¿½^ï¿½ï¿½ï¿½ê‚½ï¿½\ï¿½ï¿½Ìï¿½ï¿½ï¿½ï¿½ï¿½detailï¿½vï¿½ï¿½ï¿½nï¿½uï¿½ï¿½ï¿½ì¬
         for (int i = 0; i < makeDataNumber.Listcount ; i++)
         {
             GameObject planbox = Instantiate(prefab, canvas.transform);
             planbox.GetComponent<DetailNumber>().detailnumber = makeDataNumber.PlanNumberList[i];
             Debug.Log("this Detail Number:"+planbox.GetComponent<DetailNumber>().detailnumber);
         }
-    }
-    void Update()
-    {
-        
+
+///////////////////////////////////////////////////
+       int ChildCount = this.transform.childCount;
+       int j;
+       int k;
+       int mini=0;
+        for(k=0;k<ChildCount;k++){
+            DateTime mins = new DateTime(6000, 4, 15, 23, 59, 59, 999);
+            DateTime minf = new DateTime(6000, 4, 16, 23, 59, 59, 999);
+            for(j=0;j<ChildCount-k;j++){
+                Data p = PlanList.DataList[transform.GetChild(j).gameObject.GetComponent<DetailNumber>().detailnumber];
+                if(p.Start<mins){
+                    mins = p.Start;
+                    minf = p.Finish;
+                    mini = j;
+                }
+            }
+            transform.GetChild(mini).SetAsLastSibling();
+        }
+
     }
 }

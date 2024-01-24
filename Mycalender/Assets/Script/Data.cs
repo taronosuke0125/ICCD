@@ -2,28 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Globalization;
 
-//—\’è‚Ì\‘¢‘ÌData
+//ï¿½\ï¿½ï¿½Ì\ï¿½ï¿½ï¿½ï¿½Data
 public class Data
 {
     public string Name;
-    public int StartY;
-    public int StartM;        
-    public int StartD;
-    public int FinishY;
-    public int FinishM;
-    public int FinishD;
+    public string Startstr;
+    public string Finishstr;
     public DateTime Start;
     public DateTime Finish;
+
+    public string memo;
+
     public void view()
     {
-        Debug.Log("Name:" + Name + ", StartY:" + StartY + ", StartM:" + StartM + ", StartD:" + StartD + ", FinishY:" + FinishY + ", FinishM:" + FinishM + ", FinishD:" + FinishD);
+        Debug.Log("Name:" + Name + ",Start:"+Start+"Finish:"+Finish);
     }
-    //•ª‚©‚ê‚Ä‚¢‚é”N,Œ,“ú‚ğDateTimeŒ^‚É•ÏŠ·
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DateTimeï¿½^ï¿½É•ÏŠï¿½,1/21ï¿½Xï¿½V
     public void IntToString()
     {
-        Start = new DateTime(StartY, StartM, StartD);
-        Finish = new DateTime(FinishY, FinishM, FinishD);
+        CultureInfo provider = CultureInfo.InvariantCulture;
+        string format= "yyyy/MM/dd/ HH:mm:ss";
+        Start = DateTime.ParseExact(Startstr,format,provider);
+        Finish = DateTime.ParseExact(Finishstr,format,provider);
     }
 
 }

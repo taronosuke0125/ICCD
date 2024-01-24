@@ -8,6 +8,7 @@ public class Del : MonoBehaviour
     //ボタンを押したときに呼び出す(1/14更新)
     public void Pushdel(){
        DeletePlan();
+        Debug.Log("pushdel");
     } 
     //予定を削除
     public void DeletePlan()
@@ -25,7 +26,7 @@ public class Del : MonoBehaviour
     {
         int count = 0;
         //ファイルのパス
-        string filePath = Application.dataPath+"/savedata.json";
+        string filePath = Application.persistentDataPath+"/savedata.json";
         //ファイルを読み込みで開く
         System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
         //一時ファイルを作成する

@@ -13,7 +13,8 @@ public class PlanList : MonoBehaviour
         string datastr = "";
         StreamReader reader;
         //“Ç‚İæ‚èêŠ‚ğw’è
-        reader = new StreamReader(Application.dataPath + "/savedata.json");
+        Debug.Log(Application.persistentDataPath);
+        reader = new StreamReader(Application.persistentDataPath + "/savedata.json");
         datacount = 0;
         while (reader.Peek() != -1)
         {

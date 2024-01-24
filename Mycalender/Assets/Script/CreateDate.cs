@@ -6,25 +6,26 @@ using System;
 using UnityEngine.SceneManagement;
 public class CreateDate : MonoBehaviour
 {
-    //“ú•tæ“¾—p
+    //ï¿½ï¿½ï¿½tï¿½æ“¾ï¿½p
     public static DateTime SelectDate;
     private DateTime D_Date;
     private int startday;
     public static DateTime ToDate;
-    //w’è‚µ‚½“ú‚©‚çµ“úŠÔ‚ğ•\¦‚·‚éŠÖ”
+    //ï¿½wï¿½è‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çµï¿½ï¿½ï¿½Ô‚ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öï¿½
     private void CalenderController(DateTime headdate)
     {   D_Date = headdate;
+        Debug.Log(D_Date);
         for (int i = 0; i < 7; i++)
         {
             if (i == 0)
             {
                 Title.GetComponent<SetTitle>().TitleController(headdate);
             }
-            //•¶š‚ğ“ü‚ê‚é
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             Transform DAY = GameObject.Find("Dates").transform.GetChild(i);
-            DateTime tmp = D_Date;//ˆêŸ•Ï”
+            DateTime tmp = D_Date;//ï¿½êŸï¿½Ïï¿½
             DayOfWeek num = tmp.DayOfWeek;
-            //“y—j“úÂE“ú—j“úÔ
+            //ï¿½yï¿½jï¿½ï¿½ï¿½ÂEï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½
             switch (num)
             {
                 case DayOfWeek.Sunday:
@@ -41,7 +42,7 @@ public class CreateDate : MonoBehaviour
             DAY.GetChild(0).GetChild(0).GetComponent<Text>().text = D_Date.ToString("MM/dd");
             DAY.GetChild(0).GetChild(1).GetComponent<Text>().text = D_Date.ToString("(ddd)");
             GameObject button = GameObject.Find("Dates").transform.GetChild(i).GetChild(0).gameObject;
-            //ƒ{ƒ^ƒ“‚É‚»‚Ì“ú•t‚ğ•Û‘¶
+            //ï¿½{ï¿½^ï¿½ï¿½ï¿½É‚ï¿½ï¿½Ì“ï¿½ï¿½tï¿½ï¿½Û‘ï¿½
             button.transform.parent.GetComponent<ButtonDate>().day = D_Date;
             DateTime d = D_Date;
             button.GetComponent<Button>().onClick.AddListener(() => { ToDetailScene(d); });
@@ -49,12 +50,12 @@ public class CreateDate : MonoBehaviour
         }
         SetPlanName();
     }
-    //ƒŠƒXƒg‚É•Û‚³‚ê‚Ä‚¢‚é—\’è‚ğŠY“–‚·‚é“ú•t‚É•\¦‚·‚é.
+    //ï¿½ï¿½ï¿½Xï¿½gï¿½É•Ûï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
     public void SetPlanName()
     {
         int i;
         Debug.Log("datacount:" + PlanList.datacount);
-        //7“úŠÔ‚Ì—\’è‰Šú‰»(ƒvƒŒƒnƒuíœ)
+        //7ï¿½ï¿½ï¿½Ô‚Ì—\ï¿½è‰ï¿½ï¿½ï¿½ï¿½(ï¿½vï¿½ï¿½ï¿½nï¿½uï¿½íœ)
         for(i=0; i<7; i++)
         {
             GameObject parent = this.transform.GetChild(i).GetChild(0).GetChild(2).gameObject;
@@ -63,50 +64,61 @@ public class CreateDate : MonoBehaviour
                 GameObject.Destroy(child.gameObject);
             }
         }
+
         for (i=0; i<PlanList.datacount; i++)
         {
-            Debug.Log(i);
-            Debug.Log("Sel:"+SelectDate);
-            Debug.Log("S:" + PlanList.DataList[i].Start);
-            Debug.Log("F:" + PlanList.DataList[i].Finish);
-            if (PlanList.DataList[i].Finish < SelectDate.Date || SelectDate.AddDays(6).Date < PlanList.DataList[i].Start)
-            {//—\’è‚ª•\¦‚³‚ê‚Ä‚¢‚é7“úŠÔ‚ÌŠÔ‚É‚È‚¢
+            //Debug.Log(i);
+            //Debug.Log("Sel:"+SelectDate);
+            //Debug.Log("S:" + PlanList.DataList[i].Start);
+            //Debug.Log("F:" + PlanList.DataList[i].Finish);
+            if (PlanList.DataList[i].Finish <= SelectDate.Date || SelectDate.AddDays(7).Date <= PlanList.DataList[i].Start)
+            {//ï¿½\ï¿½è‚ªï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½7ï¿½ï¿½ï¿½Ô‚ÌŠÔ‚É‚È‚ï¿½ï¿½ï¿½
                 Debug.Log("Case1");
                 continue;
-            }else if (PlanList.DataList[i].Start < SelectDate.Date)
-            {//—\’èŠJn“ú‚ªæ“ª‚Ì“ú•t‚æ‚è‚à‘O
-                if(PlanList.DataList[i].Finish <= SelectDate.AddDays(6).Date)
-                {//—\’èI—¹“ú‚ªÅŒã”ö‚Ì“ú•tˆÈ‘O
+            }else if (PlanList.DataList[i].Start <= SelectDate.Date)
+            {//ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½00:00ï¿½ï¿½ï¿½ï¿½ï¿½O
+                if(PlanList.DataList[i].Finish <= SelectDate.AddDays(7).Date)
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½Ì“ï¿½ï¿½t+1ï¿½ï¿½00:00ï¿½È‘O
                     Debug.Log("Case2");
                     int j = 0;
                     do
                     {
                         GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
-                        GameObject planname = Instantiate(plantext, planview.transform);
-                        planname.GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        //ï¿½\ï¿½ï¿½Ìƒ{ï¿½^ï¿½ï¿½ï¿½ì¬
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        Debug.Log(planpanelobj.name);
+                        //ï¿½\ï¿½ï¿½Ì–ï¿½ï¿½O,ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Lï¿½ï¿½
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+
+                        if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Finish.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text = "ï¿½`" + PlanList.DataList[i].Finish.ToString("HH:mm");
+                            Debug.Log("written");
+                        }
+
                         j++;
-                    } while ( SelectDate.Date.AddDays(j) <= PlanList.DataList[i].Finish);
+                    } while ( SelectDate.Date.AddDays(j) < PlanList.DataList[i].Finish);
                 }
                 else
-                {//—\’èI—¹“ú‚ªÅŒã”ö‚æ‚èŒã
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     Debug.Log("Case4");
                     int j ;
                     for(j=0 ; j < 7 ; j++)
                     {
                         GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
-                        GameObject planname = Instantiate(plantext, planview.transform);
-                        planname.GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
                     }
                 }
             }
             else
-            {//—\’èŠJn“ú‚ªæ“ª‚Ì“ú•tˆÈ~
-                if (PlanList.DataList[i].Finish <= SelectDate.AddDays(6).Date)
-                {//—\’èI—¹“ú‚ªÅŒã”ö‚Ì“ú•tˆÈ‘O
+            {//ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½00:00ï¿½È~
+                if (PlanList.DataList[i].Finish <= SelectDate.AddDays(7).Date)
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½Ì“ï¿½ï¿½tï¿½È‘O
                     Debug.Log("Case5");
                     int j = 0;
-                    //—\’èŠJn“ú‚ªæ“ª‚Ì“ú•t‚©‚ç‰½”Ô–Ú‚©
-                    while(SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start)
+                    //ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½ï¿½ç‰½ï¿½Ô–Ú‚ï¿½
+                    while(SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start.Date)
                     {
                         j++;
                     }
@@ -114,17 +126,25 @@ public class CreateDate : MonoBehaviour
                     do
                     {
                         GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
-                        GameObject planname = Instantiate(plantext, planview.transform);
-                        planname.GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Start.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text =PlanList.DataList[i].Start.ToString("HH:mm")+"ï¿½`";
+                        }
+                        if(SelectDate.Date.AddDays(j) == PlanList.DataList[i].Finish.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text += PlanList.DataList[i].Finish.ToString("HH:mm");
+                        }
                         j++;
-                    } while (SelectDate.Date.AddDays(j) <= PlanList.DataList[i].Finish);
+                    } while (SelectDate.Date.AddDays(j) < PlanList.DataList[i].Finish);
                 }
                 else
-                {//—\’èI—¹“ú‚ªÅŒã”ö‚æ‚èŒã
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                     Debug.Log("Case3");
                     int j = 0;
-                    //—\’èŠJn“ú‚ªæ“ª‚Ì“ú•t‚©‚ç‰½”Ô–Ú‚©
-                    while (SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start)
+                    //ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½ï¿½ç‰½ï¿½Ô–Ú‚ï¿½
+                    while (SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start.Date)
                     {
                         j++;
                     }
@@ -132,8 +152,12 @@ public class CreateDate : MonoBehaviour
                     do
                     {
                         GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
-                        GameObject planname = Instantiate(plantext, planview.transform);
-                        planname.GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Start.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text = PlanList.DataList[i].Start.ToString("HH:mm") + "ï¿½`";
+                        }
                         j++;
                     } while (j<7);
                 }
@@ -141,53 +165,53 @@ public class CreateDate : MonoBehaviour
         }
     }
 
-    //WeekChange.cs‚ÅŒÄ‚Ño‚³‚êƒJƒŒƒ“ƒ_[‚ğ—ˆT‚Éi‚ß‚é
+    //WeekChange.csï¿½ÅŒÄ‚Ñoï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½ğ—ˆTï¿½Éiï¿½ß‚ï¿½
     public void ToNextWeekCalender()
     {
         SelectDate = SelectDate.AddDays(7);
         CalenderController(SelectDate);    
     }
     
-    //WeekChange.cs‚ÅŒÄ‚Ño‚³‚êƒJƒŒƒ“ƒ_[‚ğæT‚Éi‚ß‚é
+    //WeekChange.csï¿½ÅŒÄ‚Ñoï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½ï¿½ï¿½Tï¿½Éiï¿½ß‚ï¿½
     public void ToLastWeekCalender()
     {
         SelectDate = SelectDate.AddDays(-7);
         CalenderController(SelectDate);
     }
-    public GameObject plantext;
+    public GameObject planpanel;
     public GameObject canvas;
     public GameObject prefab;
     public GameObject Title;
     RectTransform DatesPos;
     Vector2 DatesPosoff;
     // Start is called before the first frame update
-    //—\’èƒf[ƒ^‚ªŒÄ‚Ño‚³‚ê‚½Œã‚ÉÀs‚³‚ê‚é•K—v‚ª‚ ‚é
+    //ï¿½\ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½ï¿½ê‚½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void Start()
     {
         
-        //ƒ{ƒ^ƒ“7ŒÂ¶¬
+        //ï¿½{ï¿½^ï¿½ï¿½7ï¿½Âï¿½ï¿½ï¿½
         for (int i = 0; i < 7; i++)
         {
             GameObject button = Instantiate(prefab, canvas.transform);
             button.GetComponent<Button>();
         }
-        //ƒXƒNƒ[ƒ‹‰æ–Ê‚Ì‰Šú’l‚ğ‹L˜^
+        //ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½Ê‚Ìï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½Lï¿½^
         DatesPos = this.GetComponent<RectTransform>();
         DatesPosoff = DatesPos.anchoredPosition;
-        //Å‰‚Í¡“ú‚ğŠî€‚É“ú•t‚ğì¬
+        //ï¿½Åï¿½ï¿½Íï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î€ï¿½É“ï¿½ï¿½tï¿½ï¿½ï¿½ì¬
         SelectDate = DateTime.Now;
         CalenderController(SelectDate);
     }
 
     void Update()
-    {   //ã‚ÉƒXƒNƒ[ƒ‹‚µ‚½‚ç“ú•t‚ğ‘O‚Éi‚ß‚é
+    {   //ï¿½ï¿½ÉƒXï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½Oï¿½Éiï¿½ß‚ï¿½
         if (DatesPos.anchoredPosition.y> 250)
         {
             this.GetComponent<RectTransform>().anchoredPosition=DatesPosoff;
             SelectDate=SelectDate.AddDays(1);
             CalenderController(SelectDate);
         }
-        //‰º‚ÉƒXƒNƒ[ƒ‹‚µ‚½‚ç“ú•t‚ğ–ß‚·
+        //ï¿½ï¿½ï¿½ÉƒXï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ß‚ï¿½
         if (DatesPos.anchoredPosition.y < -250)
         {
             this.GetComponent<RectTransform>().anchoredPosition = DatesPosoff;
@@ -195,7 +219,7 @@ public class CreateDate : MonoBehaviour
             CalenderController(SelectDate);
         }
     }
-    //—\’èÚ×ƒV[ƒ“‚Ö‘JˆÚ
+    //ï¿½\ï¿½ï¿½Ú×ƒVï¿½[ï¿½ï¿½ï¿½Ö‘Jï¿½ï¿½
     public void ToDetailScene(DateTime date)
     {
         ToDate = date;

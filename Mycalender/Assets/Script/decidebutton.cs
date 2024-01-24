@@ -11,7 +11,7 @@ public class decidebutton : MonoBehaviour
     public static bool inedit=false;
     public void OnClickdecideButton()
     {
-        Debug.Log(inedit);
+        //Debug.Log(inedit);
         if (inedit)
         {//予定編集時
             EditPlan(Edit.changenumber);
@@ -31,39 +31,42 @@ public class decidebutton : MonoBehaviour
     //予定をjsonファイルに登録する
     private void RegistPlan()
     {
-        DateTime starttime = setstartday.starttime;
-        DateTime finish = setstartday.finish;
+        DateTime start = setstartday.starttime.Date;
+        DateTime finish = setstartday.finish.Date;
+        Debug.Log("Start:"+start);
+        Debug.Log("Finish:" + finish);
+        start += TimeSpan.Parse(Timetext.starttime);
+        finish += TimeSpan.Parse(Timetext.finishtime);
+        Debug.Log("Startex:" + start);
+        Debug.Log("Finishex:" + finish);
         Data schedule = new Data();
         schedule.Name = setstartday.planname;
-        schedule.StartY = int.Parse(starttime.ToString("yyyy"));
-        schedule.StartM = int.Parse(starttime.ToString("MM"));
-        schedule.StartD = int.Parse(starttime.ToString("dd"));
-        schedule.FinishY = int.Parse(finish.ToString("yyyy"));
-        schedule.FinishM = int.Parse(finish.ToString("MM"));
-        schedule.FinishD = int.Parse(finish.ToString("dd"));
+        schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
+        schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
         string jsonschedule = JsonUtility.ToJson(schedule);
-        string path = Application.dataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
+        string path = Application.persistentDataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine(jsonschedule);
         writer.Close();
+        //予定を登録したら時間を初期化
+        Timetext.starttime = "00:00";
+        Timetext.finishtime = "00:00";
     }
     //1/16更新 jsonファイルn行目の予定を書き換える
     private void EditPlan(int n)
     {
-        DateTime starttime = setstartday.starttime;
-        DateTime finish = setstartday.finish;
+        DateTime start = setstartday.starttime.Date;
+        DateTime finish = setstartday.finish.Date;
+        start += TimeSpan.Parse(Timetext.starttime);
+        finish += TimeSpan.Parse(Timetext.finishtime);
         Data schedule = new Data();
         schedule.Name = setstartday.planname;
-        schedule.StartY = int.Parse(starttime.ToString("yyyy"));
-        schedule.StartM = int.Parse(starttime.ToString("MM"));
-        schedule.StartD = int.Parse(starttime.ToString("dd"));
-        schedule.FinishY = int.Parse(finish.ToString("yyyy"));
-        schedule.FinishM = int.Parse(finish.ToString("MM"));
-        schedule.FinishD = int.Parse(finish.ToString("dd"));
+        schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
+        schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
         string jsonschedule = JsonUtility.ToJson(schedule);
         int count = 0;
         //ファイルのパス
-        string filePath = Application.dataPath + "/savedata.json";
+        string filePath = Application.persistentDataPath+ "/savedata.json";
         //ファイルを読み込みで開く
         System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
         //一時ファイルを作成する
@@ -92,5 +95,8 @@ public class decidebutton : MonoBehaviour
         //一時ファイルと入れ替える
         System.IO.File.Copy(tmpPath, filePath, true);
         System.IO.File.Delete(tmpPath);
+        //予定を登録したら時間を初期化
+        Timetext.starttime = "00:00";
+        Timetext.finishtime = "00:00";
     }
 }

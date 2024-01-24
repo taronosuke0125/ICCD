@@ -8,13 +8,15 @@ public class Genelist : MonoBehaviour
      private const string PASSWORD_CHARS = 
         "0123456789abcdefghijklmnopqrstuvwxyz";
 
-    public static bool open = false;
+    public bool open = false;
     [SerializeField]
     public GameObject obj;//詳細パネルオブジェクト
     
     public bool a = true;
    
     public string rnd;
+
+    public string stext;
 
     public void BGenelist(){ 
         Transform tri = transform.Find("triangle2");
@@ -24,8 +26,6 @@ public class Genelist : MonoBehaviour
             //GameObject child = transform.GetChild(0).gameObject;
             Transform dest = transform.root.Find("gamen").Find(rnd);
 
-            Debug.Log(rnd);
-
             Destroy(dest.gameObject);
             open = false;
         }else{
@@ -34,12 +34,13 @@ public class Genelist : MonoBehaviour
 
             rnd = GeneratePassword(10);
 
-            Debug.Log(rnd);
+            //Debug.Log(rnd);
 
             Transform root = transform.root.Find("gamen");
 
             GameObject obj2 = Instantiate (obj,root);
             obj2.name=rnd;
+            obj2.GetComponent<DetailNumber>().detailnumber = transform.parent.gameObject.GetComponent<DetailNumber>().detailnumber;
             
 
             //次の順番にオブジェクトに配置

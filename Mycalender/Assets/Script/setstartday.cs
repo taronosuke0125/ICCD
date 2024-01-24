@@ -40,6 +40,8 @@ public class setstartday : MonoBehaviour
             starttime = p1.Start;
             finish = p1.Finish;
             //•ÒW‰æ–Ê‚Æ‚µ‚Ä—˜—p‚·‚é‚Æ‚«
+            Timetext.starttime = starttime.ToString("HH:mm");
+            Timetext.finishtime = finish.ToString("HH:mm");
             DAY.GetComponent<Text>().text = starttime.ToString("yyyy/MM/dd");
             DAY2.GetComponent<Text>().text = finish.ToString("yyyy/MM/dd");
         }

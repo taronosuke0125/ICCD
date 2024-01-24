@@ -10,30 +10,16 @@ public class Updater : MonoBehaviour
     public Text Nametext;
     public Text Timetext;
 
-    // Update is called once per frame
-    void Update()
+
+
+    private void Start()
     {
-        string pname;
-        int so,sm,fo,fm;
-        so=13;
-        sm=30;
-        fo=14;
-        fm=0;
-
-        pname = "夕ご飯";
-
-        Nametext.text = pname;
-        Timetext.text = zerostring(so) + ":" + zerostring(sm) + "～" + zerostring(fo) + ":" + zerostring(fm); 
+        Debug.Log(this.GetComponent<DetailNumber>().detailnumber);
+        Data p = PlanList.DataList[this.GetComponent<DetailNumber>().detailnumber];
+        Nametext.text = p.Name;
+        string s = p.Startstr.Substring(12, 5);
+        string f = p.Finishstr.Substring(12, 5);
+        Timetext.text = s + "～" + f;
+        this.name = p.Name;
     }
-
-    //0や1を00、01にする。
-    public string zerostring(int a){
-        string b;
-        if(a<=9){
-            b = "0" + a.ToString();
-        }else{
-            b = a.ToString();
-        }
-        return b;
-    } 
 }
