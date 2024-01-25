@@ -11,7 +11,7 @@ public class SaveManager : MonoBehaviour
         StreamWriter writer;
         string jsonstr = JsonUtility.ToJson(plan);
 
-        writer = new StreamWriter(Application.dataPath + "/savedata.json", false);
+        writer = new StreamWriter(Application.persistentDataPath + "/savedata.json", false);
         writer.Write(jsonstr);
         writer.Flush();
         writer.Close();
@@ -21,7 +21,7 @@ public class SaveManager : MonoBehaviour
     {
         string datastr = "";
         StreamReader reader;
-        reader = new StreamReader(Application.dataPath + "/savedata.json");
+        reader = new StreamReader(Application.persistentDataPath + "/savedata.json");
         datastr = reader.ReadToEnd();
         reader.Close();
 
