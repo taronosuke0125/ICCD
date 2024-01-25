@@ -14,7 +14,7 @@ public class Timeset : MonoBehaviour
     private GameObject Panel;
     [SerializeField]
 
-    private static int flag;//0ならstarttimeに記録、1ならfinishtimeに記録
+    private static int flag;//0ならstarttimeに記録、1ならfinishtimeに記録、2ならterm、3ならmin、4ならmax(1/24更新)
     public static int count=0;
     //ボタンを押すとそのボタンに登録された数字を追加してtimeに出力
     public void Push_Button(int number)
@@ -72,18 +72,36 @@ public class Timeset : MonoBehaviour
     //ボタンを押すと表示されている時間を格納する
     public void Enter_Button()
     {
-        if (flag == 0)
+        switch (flag)
         {
-            Timetext.starttime = time1.text + ":" + time2.text;
-            Timetext.regist_time();
-            Return_Button();
+            //0ならstarttimeに記録、1ならfinishtimeに記録、2ならterm、3ならmin、4ならmax(1/24更新)
+            case 0:
+                Timetext.starttime = time1.text + ":" + time2.text;
+                Timetext.regist_time();
+                break;
+            case 1:
+                Timetext.finishtime = time1.text + ":" + time2.text;
+                Timetext.regist_time();
+                break;
+            case 2:
+                WantTimetext.term = time1.text + ":" + time2.text;
+                WantTimetext.regist_time(0);
+                break;
+            case 3:
+                WantTimetext.deadline = time1.text + ":" + time2.text;
+                WantTimetext.regist_time(1);
+                break;
+            case 4:
+                WantTimetext.min = time1.text + ":" + time2.text;
+                WantTimetext.regist_time(2);
+                break;
+            case 5:
+                WantTimetext.max = time1.text + ":" + time2.text;
+                WantTimetext.regist_time(3);
+                break;
         }
-        else
-        {
-            Timetext.finishtime = time1.text + ":" + time2.text;
-            Timetext.regist_time();
-            Return_Button();
-        }
+        Return_Button();
+        Debug.Log("Excuted");
     }
     //ボタンを押すとボタンパネルを表示する    
     public void Active_Button(int i)

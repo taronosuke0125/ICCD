@@ -12,6 +12,7 @@ public class Data
     public string Finishstr;
     public DateTime Start;
     public DateTime Finish;
+    public string memo;
     public void view()
     {
         Debug.Log("Name:" + Name + ",Start:"+Start+"Finish:"+Finish);

@@ -20,5 +20,11 @@ public class startday : MonoBehaviour
         SceneManager.LoadScene("New Scene");
 
     }
+    public void OnClickDLButton()
+    {
+        changeflug = 4;
+        SceneManager.LoadScene("New Scene");
+
+    }
       
 }

@@ -4,15 +4,53 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
-public class makecalender : MonoBehaviour
+
+public class DesignedCalendar : MonoBehaviour
 {
+    public GameObject canvas;  // エディタから指定
+    public GameObject prefab;  // エディタから指定
+    public Text displayText;   // 表示するテキストオブジェクト
+    public Text monthYearText; // 追加: 年月を表示するテキストオブジェクト
 
- public static DateTime SelectDate;
- private DateTime D_Date;
- private int startday;
- public static DateTime ChangeDate;
+    private DateTime SelectDate;
+    private DateTime D_Date;
+    private int startday;
 
- private void CalendarController()
+   // 追加: 保存するための変数(makecalender.csでいうChangeDate)
+    public static DateTime selectedDate;
+
+    void Start()
+    {
+        for (int i = 0; i < 42; i++)
+        {
+            GameObject button = Instantiate(prefab, canvas.transform);
+            button.GetComponent<Button>();
+        }
+
+        // 追加: 年月を表示するテキストオブジェクトの初期設定
+        // 注意: オブジェクトがアタッチされていることを確認する
+        if (monthYearText == null)
+        {
+            Debug.LogError("monthYearText is not assigned.");
+        }
+        else
+        {
+            UpdateMonthYearText();
+        }
+
+        SelectDate = DateTime.Now;
+        CalendarController();
+
+        // 追加: 翌月に移動するボタンのクリックイベント
+        Button nextMonthButton = GameObject.Find("NextMonthButton").GetComponent<Button>();
+        nextMonthButton.onClick.AddListener(MoveToNextMonth);
+
+        // 追加: 前月に移動するボタンのクリックイベント
+        Button prevMonthButton = GameObject.Find("PrevMonthButton").GetComponent<Button>();
+        prevMonthButton.onClick.AddListener(MoveToPrevMonth);
+    }
+
+    private void CalendarController()
     {
         int days = 1;
         int overday = 1;
@@ -55,14 +93,15 @@ public class makecalender : MonoBehaviour
                 break;
         }
         int lastmonthdays = lastmonth - startday + 1;
+
         for (int i = 0; i < 42; i++)
         {
             if (i >= startday)
             {
                 if (days <= monthEnd)
                 {
-                    //文字を入れる
-                    Transform DAY = GameObject.Find("buttons").transform.GetChild(i);
+                    // 文字を入れる
+                    Transform DAY = canvas.transform.GetChild(i);
                     DateTime tmp = D_Date;//一時変数
                     DayOfWeek num = tmp.DayOfWeek;
                     //土曜日青・日曜日赤
@@ -77,11 +116,10 @@ public class makecalender : MonoBehaviour
                         default:
                             DAY.GetChild(0).GetComponent<Text>().color = Color.black;
                             break;
-
                     }
                     DAY.GetChild(0).GetComponent<Text>().text = D_Date.Day.ToString();
                     //以下3行追加
-                    GameObject button = GameObject.Find("buttons").transform.GetChild(i).gameObject;
+                    GameObject button = canvas.transform.GetChild(i).gameObject;
                     button.GetComponent<Button>().onClick.RemoveAllListeners();
                     button.GetComponent<Button>().onClick.AddListener(() => { set_Date(tmp); });
                     D_Date = D_Date.AddDays(1);
@@ -89,46 +127,64 @@ public class makecalender : MonoBehaviour
                 }
                 else
                 {
-                    Transform DAY = GameObject.Find("buttons").transform.GetChild(i);
+                    Transform DAY = canvas.transform.GetChild(i);
                     DAY.GetChild(0).GetComponent<Text>().color = Color.gray;
                     DAY.GetChild(0).GetComponent<Text>().text = overday.ToString();
-                    GameObject button = GameObject.Find("buttons").transform.GetChild(i).gameObject;
+                    GameObject button = canvas.transform.GetChild(i).gameObject;
                     button.GetComponent<Button>().onClick.RemoveAllListeners();
                     overday++;
                 }
             }
             else
             {
-                Transform DAY = GameObject.Find("buttons").transform.GetChild(i);
+                Transform DAY = canvas.transform.GetChild(i);
                 DAY.GetChild(0).GetComponent<Text>().color = Color.gray;
                 DAY.GetChild(0).GetComponent<Text>().text = lastmonthdays.ToString();
-                GameObject button = GameObject.Find("buttons").transform.GetChild(i).gameObject;
+                GameObject button = canvas.transform.GetChild(i).gameObject;
                 button.GetComponent<Button>().onClick.RemoveAllListeners();
                 lastmonthdays++;
             }
         }
+
+        // 年月を表示するテキストオブジェクトを更新
+        UpdateMonthYearText();
     }
 
- void set_Date(DateTime date)
+    // 年月を表示するテキストを更新するメソッド
+    void UpdateMonthYearText()
+    {
+        if (monthYearText != null)
+        {
+            monthYearText.text = SelectDate.ToString("yyyy/MM");
+        }
+        else
+        {
+            Debug.LogError("monthYearText is not assigned.");
+        }
+    }
+
+    // 日付を保存するためのメソッド
+    void set_Date(DateTime date)
     {
         Debug.Log(date);
-        ChangeDate = date;
-        
+        selectedDate = date;
+        // テキストオブジェクトに日付を表示
+        displayText.text = selectedDate.ToString();
         SceneManager.LoadScene("SetPlan");
-        //値を保存する処理など
+       
     }
- 
- public GameObject canvas;//エディタから指定
- public GameObject prefab;//エディタから指定
 
- void Start()
+    // 翌月に移動するメソッド
+    void MoveToNextMonth()
     {
-        for (int i = 0; i < 42; i++)
-        {
-            GameObject button = Instantiate(prefab, canvas.transform);
-            button.GetComponent<Button>();
-        }
-        SelectDate = DateTime.Now;
+        SelectDate = SelectDate.AddMonths(1);
+        CalendarController();
+    }
+
+    // 前月に移動するメソッド
+    void MoveToPrevMonth()
+    {
+        SelectDate = SelectDate.AddMonths(-1);
         CalendarController();
     }
 }
