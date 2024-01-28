@@ -19,7 +19,6 @@ public class setdeadline : MonoBehaviour
         flug = startday.changeflug;
         now = CreateDate.SelectDate;
         Date = DesignedCalendar.selectedDate;
-        wantplanname = "blank";
 
         switch (flug) 
         {

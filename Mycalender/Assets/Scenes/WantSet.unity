@@ -2534,6 +2534,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
@@ -2546,7 +2550,23 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: EnteredWantPlanName
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 829027911}
+    - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: EnteredWantPlanName
       objectReference: {fileID: 0}
     - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
@@ -2554,7 +2574,15 @@ PrefabInstance:
       value: InputWantPlanTitle, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InputWantPlanTitle, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
       propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1766731590353108652, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2121546436049842500, guid: 3c01bbc39e3bb904e9876d652f110a8b, type: 3}

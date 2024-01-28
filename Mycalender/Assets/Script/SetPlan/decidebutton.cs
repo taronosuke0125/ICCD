@@ -110,6 +110,9 @@ public class decidebutton : MonoBehaviour
         deadline += TimeSpan.Parse(WantTimeText.deadlinetime);
         WantData schedule = new WantData();
         schedule.Name = setdeadline.wantplanname;
+        Debug.Log(setdeadline.wantplanname);
+        Debug.Log(schedule.Name);
+        schedule.Termstr = WantTimeText.term;
         schedule.DeadLinestr = deadline.ToString("yyyy/MM/dd/ HH:mm:ss");
         schedule.maxstr=WantTimeText.max;
         schedule.minstr = WantTimeText.min;

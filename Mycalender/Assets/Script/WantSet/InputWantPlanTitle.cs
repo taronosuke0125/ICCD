@@ -17,7 +17,8 @@ public class InputWantPlanTitle : MonoBehaviour
     {
         staticname = Name.text;
         setdeadline.wantplanname = staticname;
-        Debug.Log(staticname);
+        Debug.Log("iwpt:"+staticname);
+        Debug.Log("iwpt2:" + setdeadline.wantplanname);
     }
     //“o˜^‚µ‚½‚çstaticname‚ğ‰Šú‰»
     public static void DeleteNameStatic()
