@@ -51,15 +51,6 @@ public class setstartday : MonoBehaviour
             DAY.GetComponent<Text>().text = starttime.ToString("yyyy/MM/dd");
             DAY2.GetComponent<Text>().text = finish.ToString("yyyy/MM/dd");
         }
-        else if (flug == 4)
-        {
-            //WantSetシーンでカレンダーからの情報を受け取る
-            Transform DAY = GameObject.Find("Start").transform.GetChild(1);
-            Transform DAY2 = GameObject.Find("Finish").transform.GetChild(1);
-            Debug.Log(flug);
-            DAY.GetComponent<Text>().text = now.ToString("yyyy/MM/dd");
-            starttime = now;
-        }
         else
         {
             Transform DAY = GameObject.Find("Start").transform.GetChild(1);

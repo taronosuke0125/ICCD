@@ -84,20 +84,20 @@ public class Timeset : MonoBehaviour
                 Timetext.regist_time();
                 break;
             case 2:
-                WantTimetext.term = time1.text + ":" + time2.text;
-                WantTimetext.regist_time(0);
+                WantTimeText.term = time1.text + ":" + time2.text;
+                WantTimeText.regist_time(0);
                 break;
             case 3:
-                WantTimetext.deadline = time1.text + ":" + time2.text;
-                WantTimetext.regist_time(1);
+                WantTimeText.deadlinetime = time1.text + ":" + time2.text;
+                WantTimeText.regist_time(1);
                 break;
             case 4:
-                WantTimetext.min = time1.text + ":" + time2.text;
-                WantTimetext.regist_time(2);
+                WantTimeText.min = time1.text + ":" + time2.text;
+                WantTimeText.regist_time(2);
                 break;
             case 5:
-                WantTimetext.max = time1.text + ":" + time2.text;
-                WantTimetext.regist_time(3);
+                WantTimeText.max = time1.text + ":" + time2.text;
+                WantTimeText.regist_time(3);
                 break;
         }
         Return_Button();

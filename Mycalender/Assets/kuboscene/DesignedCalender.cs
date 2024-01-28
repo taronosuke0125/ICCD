@@ -11,10 +11,9 @@ public class DesignedCalendar : MonoBehaviour
     public GameObject prefab;  // エディタから指定
     public Text displayText;   // 表示するテキストオブジェクト
     public Text monthYearText; // 追加: 年月を表示するテキストオブジェクト
-
     private DateTime SelectDate;
     private DateTime D_Date;
-    private int startday;
+    private int startdate;
 
    // 追加: 保存するための変数(makecalender.csでいうChangeDate)
     public static DateTime selectedDate;
@@ -71,32 +70,32 @@ public class DesignedCalendar : MonoBehaviour
         switch (firstDate)
         {
             case DayOfWeek.Sunday:
-                startday = 0;
+                startdate = 0;
                 break;
             case DayOfWeek.Monday:
-                startday = 1;
+                startdate = 1;
                 break;
             case DayOfWeek.Tuesday:
-                startday = 2;
+                startdate = 2;
                 break;
             case DayOfWeek.Wednesday:
-                startday = 3;
+                startdate = 3;
                 break;
             case DayOfWeek.Thursday:
-                startday = 4;
+                startdate = 4;
                 break;
             case DayOfWeek.Friday:
-                startday = 5;
+                startdate = 5;
                 break;
             case DayOfWeek.Saturday:
-                startday = 6;
+                startdate = 6;
                 break;
         }
-        int lastmonthdays = lastmonth - startday + 1;
+        int lastmonthdays = lastmonth - startdate + 1;
 
         for (int i = 0; i < 42; i++)
         {
-            if (i >= startday)
+            if (i >= startdate)
             {
                 if (days <= monthEnd)
                 {
@@ -121,7 +120,8 @@ public class DesignedCalendar : MonoBehaviour
                     //以下3行追加
                     GameObject button = canvas.transform.GetChild(i).gameObject;
                     button.GetComponent<Button>().onClick.RemoveAllListeners();
-                    button.GetComponent<Button>().onClick.AddListener(() => { set_Date(tmp); });
+                    //startday.changeflugによってボタンを押した時の遷移先が変わる
+                    button.GetComponent<Button>().onClick.AddListener(() => { set_Date(tmp,startday.changeflug); });
                     D_Date = D_Date.AddDays(1);
                     days++;
                 }
@@ -163,15 +163,18 @@ public class DesignedCalendar : MonoBehaviour
         }
     }
 
-    // 日付を保存するためのメソッド
-    void set_Date(DateTime date)
+    // 日付を保存するためのメソッド(numberが1,2,3ならSetPlanに遷移,4,5ならWantSetに遷移)
+    void set_Date(DateTime date, int number)
     {
-        Debug.Log(date);
         selectedDate = date;
         // テキストオブジェクトに日付を表示
         displayText.text = selectedDate.ToString();
-        SceneManager.LoadScene("SetPlan");
-       
+        Debug.Log(number);        
+        if (number < 4)
+            SceneManager.LoadScene("SetPlan");
+        else
+            SceneManager.LoadScene("WantSet");
+
     }
 
     // 翌月に移動するメソッド

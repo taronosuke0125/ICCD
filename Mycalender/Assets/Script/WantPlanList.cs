@@ -39,7 +39,7 @@ public class WantPlanList : MonoBehaviour
     private void Start()
     {
         //Å‰‚Ésavewantdata‚ğ“Ç‚İ‚İƒŠƒXƒg‚ğì¬‚·‚é
-        LoadWantPlan();
-        viewWantPlan();
+        //LoadWantPlan();
+        //viewWantPlan();
     }
 }

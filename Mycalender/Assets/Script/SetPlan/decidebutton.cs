@@ -9,12 +9,13 @@ public class decidebutton : MonoBehaviour
 {
     // Start is called before the first frame update
     public static bool inedit=false;
+    //SetPlanの登録ボタンにアタッチ
     public void OnClickdecideButton()
     {
         //Debug.Log(inedit);
         if (inedit)
         {//予定編集時
-            EditPlan(Edit.changenumber);
+            RegistPlan(Edit.changenumber);
             //予定リストを再読み込み
             PlanList.LoadPlan();
             InputPlantitle.DeleteNameStatic();
@@ -28,32 +29,24 @@ public class decidebutton : MonoBehaviour
             SceneManager.LoadScene("Calender");
         }
     }
-    //予定をjsonファイルに登録する
-    private void RegistPlan()
+    //WantSetシーンの登録ボタンにアタッチ
+    public void OnClickdecideButtonForWant()
     {
-        DateTime start = setstartday.starttime.Date;
-        DateTime finish = setstartday.finish.Date;
-        Debug.Log("Start:"+start);
-        Debug.Log("Finish:" + finish);
-        start += TimeSpan.Parse(Timetext.starttime);
-        finish += TimeSpan.Parse(Timetext.finishtime);
-        Debug.Log("Startex:" + start);
-        Debug.Log("Finishex:" + finish);
-        Data schedule = new Data();
-        schedule.Name = setstartday.planname;
-        schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
-        schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
-        string jsonschedule = JsonUtility.ToJson(schedule);
-        string path = Application.persistentDataPath + "/savedata.json"; /* 既存のJSONファイルのパス */
-        StreamWriter writer = new StreamWriter(path, true);
-        writer.WriteLine(jsonschedule);
-        writer.Close();
-        //予定を登録したら時間を初期化
-        Timetext.starttime = "00:00";
-        Timetext.finishtime = "00:00";
+        if (inedit)
+        {//やりたいことリスト編集時
+            RegistWantPlan(Edit.changenumber);
+            inedit = false;
+        }
+        else
+        {//やりたいこと登録時
+            RegistWantPlan();
+        }
+        InputWantPlanTitle.DeleteNameStatic();
+        SceneManager.LoadScene("WantView");
     }
-    //1/16更新 jsonファイルn行目の予定を書き換える
-    private void EditPlan(int n)
+    
+    //1/28更新 jsonファイルn行目の予定を書き換える、登録と編集のメソッドを共通化(n<0なら登録、それ以外ならn行目の予定を編集)
+    private void RegistPlan(int n=-1)
     {
         DateTime start = setstartday.starttime.Date;
         DateTime finish = setstartday.finish.Date;
@@ -66,37 +59,103 @@ public class decidebutton : MonoBehaviour
         string jsonschedule = JsonUtility.ToJson(schedule);
         int count = 0;
         //ファイルのパス
-        string filePath = Application.persistentDataPath+ "/savedata.json";
-        //ファイルを読み込みで開く
-        System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
-        //一時ファイルを作成する
-        string tmpPath = System.IO.Path.GetTempFileName();
-        //一時ファイルを書き込みで開く
-        System.IO.StreamWriter sw = new System.IO.StreamWriter(tmpPath);
-
-        //内容を一行ずつ読み込む
-        while (sr.Peek() > -1)
+        string filePath = Application.persistentDataPath + "/savedata.json";
+        
+        if (n < 0) 
         {
-            //一行読み込む
-            string line = sr.ReadLine();
-            //指定した行であれば、編集した予定を格納する
-            if (count == n)
-            {
-                line = jsonschedule;
-            }
-            //一時ファイルに書き込む
-            sw.WriteLine(line);
-            count++;
+            StreamWriter writer = new StreamWriter(filePath, true);
+            writer.WriteLine(jsonschedule);
+            writer.Close();
         }
-        //閉じる
-        sr.Close();
-        sw.Close();
+        else
+        {
+            //ファイルを読み込みで開く
+            System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
 
-        //一時ファイルと入れ替える
-        System.IO.File.Copy(tmpPath, filePath, true);
-        System.IO.File.Delete(tmpPath);
+            //一時ファイルを作成する
+            string tmpPath = System.IO.Path.GetTempFileName();
+            //一時ファイルを書き込みで開く
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(tmpPath);
+
+            //内容を一行ずつ読み込む
+            while (sr.Peek() > -1)
+            {
+                //一行読み込む
+                string line = sr.ReadLine();
+                //指定した行であれば、編集した予定を格納する
+                if (count == n)
+                {
+                    line = jsonschedule;
+                }
+                //一時ファイルに書き込む
+                sw.WriteLine(line);
+                count++;
+            }
+            //閉じる
+            sr.Close();
+            sw.Close();
+            //一時ファイルと入れ替える
+            System.IO.File.Copy(tmpPath, filePath, true);
+            System.IO.File.Delete(tmpPath);
+        }
         //予定を登録したら時間を初期化
         Timetext.starttime = "00:00";
         Timetext.finishtime = "00:00";
+    }
+
+    //やりたいことリストを登録or編集
+    public void RegistWantPlan(int n=-1)
+    {
+        DateTime deadline = setdeadline.deadline.Date;
+        deadline += TimeSpan.Parse(WantTimeText.deadlinetime);
+        WantData schedule = new WantData();
+        schedule.Name = setdeadline.wantplanname;
+        schedule.DeadLinestr = deadline.ToString("yyyy/MM/dd/ HH:mm:ss");
+        schedule.maxstr=WantTimeText.max;
+        schedule.minstr = WantTimeText.min;
+        string jsonschedule = JsonUtility.ToJson(schedule);
+        int count = 0;
+        //ファイルのパス
+        string filePath = Application.persistentDataPath + "/savewantdata.json";
+        Debug.Log(filePath);
+        if (n < 0)
+        {
+            StreamWriter writer = new StreamWriter(filePath, true);
+            writer.WriteLine(jsonschedule);
+            writer.Close();
+        }
+        else
+        {
+            //ファイルを読み込みで開く
+            System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
+            //一時ファイルを作成する
+            string tmpPath = System.IO.Path.GetTempFileName();
+            //一時ファイルを書き込みで開く
+            System.IO.StreamWriter sw = new System.IO.StreamWriter(tmpPath);
+
+            //内容を一行ずつ読み込む
+            while (sr.Peek() > -1)
+            {
+                //一行読み込む
+                string line = sr.ReadLine();
+                //指定した行であれば、編集した予定を格納する
+                if (count == n)
+                {
+                    line = jsonschedule;
+                }
+                //一時ファイルに書き込む
+                sw.WriteLine(line);
+                count++;
+            }
+            //閉じる
+            sr.Close();
+            sw.Close();
+            //一時ファイルと入れ替える
+            System.IO.File.Copy(tmpPath, filePath, true);
+            System.IO.File.Delete(tmpPath);
+        }
+        //予定を登録したら時間を初期化
+        WantTimeText.deadlinetime = "00:00";
+        
     }
 }

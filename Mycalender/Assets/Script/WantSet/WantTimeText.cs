@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
-public class WantTimetext : MonoBehaviour
+public class WantTimeText : MonoBehaviour
 {
     public static string term = "12:00";//Timeset.cs‚Å“ü—Í‚³‚ê‚½ŽžŠÔ‚ðŠi”[
-    public static string deadline = "13:00";//Timeset.cs‚Å“ü—Í‚³‚ê‚½ŽžŠÔ‚ðŠi”[
+    public static string deadlinetime = "13:00";//Timeset.cs‚Å“ü—Í‚³‚ê‚½ŽžŠÔ‚ðŠi”[
     public static string min = "15:00";//Timeset.cs‚Å“ü—Í‚³‚ê‚½ŽžŠÔ‚ðŠi”[
     public static string max = "18:00";//Timeset.cs‚Å“ü—Í‚³‚ê‚½ŽžŠÔ‚ðŠi”[
 
@@ -21,7 +21,7 @@ public class WantTimetext : MonoBehaviour
         if (number == 0)
             GameObject.Find("TermTime").GetComponent<TextMeshProUGUI>().text = term;
         if (number == 1)
-            GameObject.Find("DLTime").GetComponent<TextMeshProUGUI>().text = deadline;
+            GameObject.Find("DLTime").GetComponent<TextMeshProUGUI>().text = deadlinetime;
         if (number==2)
             GameObject.Find("MinTime").GetComponent<TextMeshProUGUI>().text = min;
         if (number==3)

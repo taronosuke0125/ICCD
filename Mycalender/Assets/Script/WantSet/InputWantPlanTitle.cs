@@ -16,7 +16,7 @@ public class InputWantPlanTitle : MonoBehaviour
     public void EnteredWantPlanName()
     {
         staticname = Name.text;
-        //setstartday.planname = Name.text;
+        setdeadline.wantplanname = staticname;
         Debug.Log(staticname);
     }
     //“o˜^‚µ‚½‚çstaticname‚ğ‰Šú‰»
