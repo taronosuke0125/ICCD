@@ -21,4 +21,18 @@ public class Edit : MonoBehaviour
         InputPlantitle.staticname = name;
         SceneManager.LoadScene("SetPlan");
     }
+    //編集モードに切り替えたWantSetシーンに遷移
+    public void WantEditB()
+    {
+        GameObject parent = transform.parent.parent.gameObject;
+        //編集するやりたいことのの番号を記録
+        changenumber = parent.GetComponent<WantDetailNumber>().wantdetailnumber;
+        //WantSetシーンのEditモード
+        decidebutton.inedit = true;
+        startday.changeflug = 5;
+        string name = WantPlanList.WantDataList[changenumber].Name;
+        setdeadline.wantplanname = name;
+        InputWantPlanTitle.staticname = name;
+        SceneManager.LoadScene("WantSet");
+    }
 }

@@ -15,18 +15,34 @@ public class Del : MonoBehaviour
     {
         GameObject parent = transform.parent.gameObject;
         int number = parent.GetComponent<DetailNumber>().detailnumber;
-        DeleteLine(number);
+        DeleteLine(number,0);
         PlanList.LoadPlan();
         PlanList.viewPlan();
         //現在のシーンをリロード
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    //jsonファイルのn行目を削除(n=0,1,2,3....)
-    public void DeleteLine(int n)
+    //やりたいことを削除
+    public void DeleteWantPlan()
+    {
+        GameObject parent = transform.parent.parent.gameObject;
+        int number = parent.GetComponent<WantDetailNumber>().wantdetailnumber;
+        DeleteLine(number, 1);
+        WantPlanList.LoadWantPlan();
+        WantPlanList.viewWantPlan();
+        //現在のシーンをリロード
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    //jsonファイルのn行目を削除(n=0,1,2,3....),m=0のとき予定を削除,m=1のときやりたいことを削除
+    public void DeleteLine(int n,int m)
     {
         int count = 0;
         //ファイルのパス
-        string filePath = Application.persistentDataPath+"/savedata.json";
+        string filePath;
+        if (m == 0)
+           filePath = Application.persistentDataPath + "/savedata.json";//予定
+        else
+           filePath = Application.persistentDataPath + "/savewantdata.json";//やりたいこと
         //ファイルを読み込みで開く
         System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
         //一時ファイルを作成する

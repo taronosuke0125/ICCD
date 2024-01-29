@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GeneratePlanBox : MonoBehaviour
 {
-    //“o˜^‚³‚ê‚½—\’è‚Ì˜a‚¾‚¯—\’è‚Ìƒ{ƒbƒNƒX‚ğì¬
+    //“o˜^‚³‚ê‚½—\’è‚Ì”‚¾‚¯—\’è‚Ìƒ{ƒbƒNƒX‚ğì¬
     public GameObject canvas;
     public GameObject prefab;
     void Start()
