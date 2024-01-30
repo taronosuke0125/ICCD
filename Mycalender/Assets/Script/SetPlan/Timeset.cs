@@ -12,8 +12,7 @@ public class Timeset : MonoBehaviour
     private TextMeshProUGUI time2;
     [SerializeField]
     private GameObject Panel;
-    [SerializeField]
-
+   
     private static int flag;//0ならstarttimeに記録、1ならfinishtimeに記録、2ならterm、3ならmin、4ならmax(1/24更新)
     public static int count=0;
     //ボタンを押すとそのボタンに登録された数字を追加してtimeに出力
@@ -109,5 +108,4 @@ public class Timeset : MonoBehaviour
         flag = i;
         Panel.SetActive(true);
     }
-
 }
