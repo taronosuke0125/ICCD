@@ -439,11 +439,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1324239909}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: effb0c6990337824287ca7a20ee22792, type: 3}
+  m_Script: {fileID: 11500000, guid: e5329a7e98e3770488573e3a1178d010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1324239909}
-  prefab: {fileID: 3918772584509641169, guid: b32ae056a5b034b4983849391086bbef, type: 3}
+  prefab: {fileID: 3918772584509641169, guid: 86ba352531fe9bf42b973c980dd570ff, type: 3}
 --- !u!114 &1324239912
 MonoBehaviour:
   m_ObjectHideFlags: 0

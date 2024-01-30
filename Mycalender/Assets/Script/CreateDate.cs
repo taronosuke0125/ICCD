@@ -3,123 +3,226 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 public class CreateDate : MonoBehaviour
 {
-    //“ú•tæ“¾—p
+    //ï¿½ï¿½ï¿½tï¿½æ“¾ï¿½p
     public static DateTime SelectDate;
     private DateTime D_Date;
     private int startday;
-    //w’è‚µ‚½“ú‚©‚çµ“úŠÔ‚ğ•\¦‚·‚éŠÖ”
+    public static DateTime ToDate;
+    //ï¿½wï¿½è‚µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½çµï¿½ï¿½ï¿½Ô‚ï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öï¿½
     private void CalenderController(DateTime headdate)
-    {
-        int days = 1;
-        int overday = 1;
-        int year = headdate.Year;//”N
-        int month = headdate.Month;//Œ
-        int day = headdate.Day;//“ú
-        //‰½“ú‚Ü‚Å‚ ‚é‚©
-        int monthEnd = DateTime.DaysInMonth(year, month);
-        D_Date = headdate;
+    {   D_Date = headdate;
+        Debug.Log(D_Date);
         for (int i = 0; i < 7; i++)
         {
             if (i == 0)
             {
                 Title.GetComponent<SetTitle>().TitleController(headdate);
             }
-            //¡Œ‚ÌI‚í‚è‚Ü‚Å
-            if (days <= monthEnd)
-                {
-                    //•¶š‚ğ“ü‚ê‚é
-                    Transform DAY = GameObject.Find("Dates").transform.GetChild(i);
-                    DateTime tmp = D_Date;//ˆêŸ•Ï”
-                    DayOfWeek num = tmp.DayOfWeek;
-                    //“y—j“úÂE“ú—j“úÔ
-                    switch (num)
-                    {
-                        case DayOfWeek.Sunday:
-                            DAY.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.red;
-                            break;
-                        case DayOfWeek.Saturday:
-                            DAY.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.blue;
-                            break;
-                        default:
-                            DAY.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.black;
-                            break;
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            Transform DAY = GameObject.Find("Dates").transform.GetChild(i);
+            DateTime tmp = D_Date;//ï¿½êŸï¿½Ïï¿½
+            DayOfWeek num = tmp.DayOfWeek;
+            //ï¿½yï¿½jï¿½ï¿½ï¿½ÂEï¿½ï¿½ï¿½jï¿½ï¿½ï¿½ï¿½
+            switch (num)
+            {
+                case DayOfWeek.Sunday:
+                    DAY.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.red;
+                    break;
+                case DayOfWeek.Saturday:
+                    DAY.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.blue;
+                    break;
+                default:
+                    DAY.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.black;
+                    break;
 
-                    }
-                    DAY.GetChild(0).GetChild(0).GetComponent<Text>().text = D_Date.ToString("MM/dd");
-                    DAY.GetChild(0).GetChild(1).GetComponent<Text>().text = D_Date.ToString("(ddd)");
-                    D_Date = D_Date.AddDays(1);
-                    days++;
-                }
-            //—ˆŒ‚Ö‚ÌØ‚è‘Ö‚í‚è
-                else
-                {
-                    Transform DAY = GameObject.Find("Dates").transform.GetChild(i);
-                    DAY.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.gray;
-                    DAY.GetChild(0).GetChild(0).GetComponent<Text>().text = overday.ToString("MM/dd");
-                    DAY.GetChild(0).GetChild(1).GetComponent<Text>().text = overday.ToString("(ddd)");
-                    GameObject button = GameObject.Find("Dates").transform.GetChild(i).GetChild(0).gameObject;
-                    Debug.Log(button.name);
-                    button.GetComponent<Button>().onClick.RemoveAllListeners();
-                    overday++;
-                }
-            
+            }
+            DAY.GetChild(0).GetChild(0).GetComponent<Text>().text = D_Date.ToString("MM/dd");
+            DAY.GetChild(0).GetChild(1).GetComponent<Text>().text = D_Date.ToString("(ddd)");
+            GameObject button = GameObject.Find("Dates").transform.GetChild(i).GetChild(0).gameObject;
+            //ï¿½{ï¿½^ï¿½ï¿½ï¿½É‚ï¿½ï¿½Ì“ï¿½ï¿½tï¿½ï¿½Û‘ï¿½
+            button.transform.parent.GetComponent<ButtonDate>().day = D_Date;
+            DateTime d = D_Date;
+            button.GetComponent<Button>().onClick.AddListener(() => { ToDetailScene(d); });
+            D_Date = D_Date.AddDays(1);
         }
-        Debug.Log("set Date");
+        SetPlanName();
     }
-    //WeekChange.cs‚ÅŒÄ‚Ño‚³‚êƒJƒŒƒ“ƒ_[‚ğ—ˆT‚Éi‚ß‚é
+    //ï¿½ï¿½ï¿½Xï¿½gï¿½É•Ûï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½\ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½É•\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
+    public void SetPlanName()
+    {
+        int i;
+        Debug.Log("datacount:" + PlanList.datacount);
+        //7ï¿½ï¿½ï¿½Ô‚Ì—\ï¿½è‰ï¿½ï¿½ï¿½ï¿½(ï¿½vï¿½ï¿½ï¿½nï¿½uï¿½íœ)
+        for(i=0; i<7; i++)
+        {
+            GameObject parent = this.transform.GetChild(i).GetChild(0).GetChild(2).gameObject;
+            foreach (Transform child in parent.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
+
+        for (i=0; i<PlanList.datacount; i++)
+        {
+            //Debug.Log(i);
+            //Debug.Log("Sel:"+SelectDate);
+            //Debug.Log("S:" + PlanList.DataList[i].Start);
+            //Debug.Log("F:" + PlanList.DataList[i].Finish);
+            if (PlanList.DataList[i].Finish <= SelectDate.Date || SelectDate.AddDays(7).Date <= PlanList.DataList[i].Start)
+            {//ï¿½\ï¿½è‚ªï¿½\ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½7ï¿½ï¿½ï¿½Ô‚ÌŠÔ‚É‚È‚ï¿½ï¿½ï¿½
+                Debug.Log("Case1");
+                continue;
+            }else if (PlanList.DataList[i].Start <= SelectDate.Date)
+            {//ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½00:00ï¿½ï¿½ï¿½ï¿½ï¿½O
+                if(PlanList.DataList[i].Finish <= SelectDate.AddDays(7).Date)
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½Ì“ï¿½ï¿½t+1ï¿½ï¿½00:00ï¿½È‘O
+                    Debug.Log("Case2");
+                    int j = 0;
+                    do
+                    {
+                        GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
+                        //ï¿½\ï¿½ï¿½Ìƒ{ï¿½^ï¿½ï¿½ï¿½ì¬
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        Debug.Log(planpanelobj.name);
+                        //ï¿½\ï¿½ï¿½Ì–ï¿½ï¿½O,ï¿½ï¿½ï¿½Ô‚ï¿½ï¿½Lï¿½ï¿½
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+
+                        if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Finish.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text = "ï¿½`" + PlanList.DataList[i].Finish.ToString("HH:mm");
+                            Debug.Log("written");
+                        }
+
+                        j++;
+                    } while ( SelectDate.Date.AddDays(j) < PlanList.DataList[i].Finish);
+                }
+                else
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    Debug.Log("Case4");
+                    int j ;
+                    for(j=0 ; j < 7 ; j++)
+                    {
+                        GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                    }
+                }
+            }
+            else
+            {//ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½00:00ï¿½È~
+                if (PlanList.DataList[i].Finish <= SelectDate.AddDays(7).Date)
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½Ì“ï¿½ï¿½tï¿½È‘O
+                    Debug.Log("Case5");
+                    int j = 0;
+                    //ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½ï¿½ç‰½ï¿½Ô–Ú‚ï¿½
+                    while(SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start.Date)
+                    {
+                        j++;
+                    }
+
+                    do
+                    {
+                        GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Start.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text =PlanList.DataList[i].Start.ToString("HH:mm")+"ï¿½`";
+                        }
+                        if(SelectDate.Date.AddDays(j) == PlanList.DataList[i].Finish.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text += PlanList.DataList[i].Finish.ToString("HH:mm");
+                        }
+                        j++;
+                    } while (SelectDate.Date.AddDays(j) < PlanList.DataList[i].Finish);
+                }
+                else
+                {//ï¿½\ï¿½ï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÅŒï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+                    Debug.Log("Case3");
+                    int j = 0;
+                    //ï¿½\ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½ï¿½æ“ªï¿½Ì“ï¿½ï¿½tï¿½ï¿½ï¿½ç‰½ï¿½Ô–Ú‚ï¿½
+                    while (SelectDate.Date.AddDays(j) != PlanList.DataList[i].Start.Date)
+                    {
+                        j++;
+                    }
+
+                    do
+                    {
+                        GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
+                        GameObject planpanelobj = Instantiate(planpanel, planview.transform);
+                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Start.Date)
+                        {
+                            planpanelobj.transform.GetChild(1).GetComponent<Text>().text = PlanList.DataList[i].Start.ToString("HH:mm") + "ï¿½`";
+                        }
+                        j++;
+                    } while (j<7);
+                }
+            }
+        }
+    }
+
+    //WeekChange.csï¿½ÅŒÄ‚Ñoï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½ğ—ˆTï¿½Éiï¿½ß‚ï¿½
     public void ToNextWeekCalender()
     {
         SelectDate = SelectDate.AddDays(7);
         CalenderController(SelectDate);    
     }
     
-    //WeekChange.cs‚ÅŒÄ‚Ño‚³‚êƒJƒŒƒ“ƒ_[‚ğæT‚Éi‚ß‚é
+    //WeekChange.csï¿½ÅŒÄ‚Ñoï¿½ï¿½ï¿½ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½[ï¿½ï¿½ï¿½Tï¿½Éiï¿½ß‚ï¿½
     public void ToLastWeekCalender()
     {
         SelectDate = SelectDate.AddDays(-7);
         CalenderController(SelectDate);
     }
-
+    public GameObject planpanel;
     public GameObject canvas;
     public GameObject prefab;
     public GameObject Title;
     RectTransform DatesPos;
     Vector2 DatesPosoff;
     // Start is called before the first frame update
+    //ï¿½\ï¿½ï¿½fï¿½[ï¿½^ï¿½ï¿½ï¿½Ä‚Ñoï¿½ï¿½ï¿½ê‚½ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½ï¿½ï¿½Kï¿½vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     void Start()
     {
-
-        //ƒ{ƒ^ƒ“7ŒÂ¶¬
+        
+        //ï¿½{ï¿½^ï¿½ï¿½7ï¿½Âï¿½ï¿½ï¿½
         for (int i = 0; i < 7; i++)
         {
             GameObject button = Instantiate(prefab, canvas.transform);
             button.GetComponent<Button>();
         }
-        //ƒXƒNƒ[ƒ‹‰æ–Ê‚Ì‰Šú’l‚ğ‹L˜^
+        //ï¿½Xï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½Ê‚Ìï¿½ï¿½ï¿½ï¿½lï¿½ï¿½ï¿½Lï¿½^
         DatesPos = this.GetComponent<RectTransform>();
         DatesPosoff = DatesPos.anchoredPosition;
-        //Å‰‚Í¡“ú‚ğŠî€‚É“ú•t‚ğì¬
+        //ï¿½Åï¿½ï¿½Íï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î€ï¿½É“ï¿½ï¿½tï¿½ï¿½ï¿½ì¬
         SelectDate = DateTime.Now;
-        Debug.Log(SelectDate);
         CalenderController(SelectDate);
     }
 
     void Update()
-    {   //ã‚ÉƒXƒNƒ[ƒ‹‚µ‚½‚ç“ú•t‚ğ‘O‚Éi‚ß‚é
+    {   //ï¿½ï¿½ÉƒXï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½Oï¿½Éiï¿½ß‚ï¿½
         if (DatesPos.anchoredPosition.y> 250)
         {
             this.GetComponent<RectTransform>().anchoredPosition=DatesPosoff;
             SelectDate=SelectDate.AddDays(1);
             CalenderController(SelectDate);
         }
-        //‰º‚ÉƒXƒNƒ[ƒ‹‚µ‚½‚ç“ú•t‚ğ–ß‚·
+        //ï¿½ï¿½ï¿½ÉƒXï¿½Nï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tï¿½ï¿½ß‚ï¿½
         if (DatesPos.anchoredPosition.y < -250)
         {
             this.GetComponent<RectTransform>().anchoredPosition = DatesPosoff;
             SelectDate = SelectDate.AddDays(-1);
             CalenderController(SelectDate);
         }
+    }
+    //ï¿½\ï¿½ï¿½Ú×ƒVï¿½[ï¿½ï¿½ï¿½Ö‘Jï¿½ï¿½
+    public void ToDetailScene(DateTime date)
+    {
+        ToDate = date;
+        SceneManager.LoadScene("detail");
     }
 }
