@@ -11,15 +11,11 @@ public class Viewtext : MonoBehaviour {
   public Text text;
 
   void Start () {
-    //Componentを扱えるようにする
         inputField = inputField.GetComponent<InputField> ();
         text = text.GetComponent<Text> ();
         Data p = PlanList.DataList[transform.parent.parent.parent.gameObject.GetComponent<DetailNumber>().detailnumber];
         Debug.Log(p.memo);
         inputField.text = p.memo;
-        //Debug.Log(p.memo);
-        //text.text = p.memo;
-        //text.text = Genelist.stext;
     }
 
     public void InputText(){

@@ -14,13 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SetPlan.unity
     guid: 13b4e51cdcb049a4786356ca54d26e17
-  - enabled: 1
-    path: Assets/Scenes/New Scene.unity
+  - enabled: 0
+    path: Assets/Scenes/New Scene(old).unity
     guid: 0c70afacb6cd9ea4a9f4795bb6b797ed
   - enabled: 1
     path: Assets/Scenes/detail.unity
     guid: 3816486fbe58d6d42bdb008720fd0ed0
-  - enabled: 0
-    path: Assets/Scenes/Edit.unity
+  - enabled: 1
+    path: Assets/Scenes/WantView.unity
     guid: c8a6ccb8a25be5e4191fe93b77540bf2
+  - enabled: 1
+    path: Assets/Scenes/WantSet.unity
+    guid: 0c94b3ca299d141498407f2bb0ef4d61
+  - enabled: 1
+    path: Assets/Scenes/New Scene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

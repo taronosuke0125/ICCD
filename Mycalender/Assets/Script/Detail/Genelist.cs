@@ -18,6 +18,7 @@ public class Genelist : MonoBehaviour
 
     public string stext;
 
+    //public Editonly eo;
     public void BGenelist(){ 
         Transform tri = transform.Find("triangle2");
         
@@ -25,7 +26,10 @@ public class Genelist : MonoBehaviour
             tri.Rotate(180,0,0);    
             //GameObject child = transform.GetChild(0).gameObject;
             Transform dest = transform.root.Find("gamen").Find(rnd);
-
+            string s = dest.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<Viewtext>().inputField.text;
+            int n = transform.parent.gameObject.GetComponent<DetailNumber>().detailnumber;
+            
+            Editonlyer(n,s);
             Destroy(dest.gameObject);
             open = false;
         }else{
@@ -68,5 +72,48 @@ public class Genelist : MonoBehaviour
         }
 
         return sb.ToString();
+    }
+
+    public void Editonlyer(int n,string s)
+    {
+
+        Data schedule = PlanList.DataList[n];
+
+        schedule.memo = s;
+        
+        string jsonschedule = JsonUtility.ToJson(schedule);
+        int count = 0;
+        // t @ C   ̃p X
+        string filePath = Application.persistentDataPath+ "/savedata.json";
+        // t @ C    ǂݍ  ݂ŊJ  
+        System.IO.StreamReader sr = new System.IO.StreamReader(filePath);
+        // ꎞ t @ C     쐬    
+        string tmpPath = System.IO.Path.GetTempFileName();
+        // ꎞ t @ C           ݂ŊJ  
+        System.IO.StreamWriter sw = new System.IO.StreamWriter(tmpPath);
+
+        //   e    s   ǂݍ   
+        while (sr.Peek() > -1)
+        {
+            //  s ǂݍ   
+            string line = sr.ReadLine();
+            // w 肵   s ł   ΁A ҏW     \    i [    
+            if (count == n)
+            {
+                line = jsonschedule;
+            }
+            // ꎞ t @ C   ɏ       
+            sw.WriteLine(line);
+            count++;
+        }
+        //    
+        sr.Close();
+        sw.Close();
+
+        // ꎞ t @ C   Ɠ   ւ   
+        System.IO.File.Copy(tmpPath, filePath, true);
+        System.IO.File.Delete(tmpPath);
+        // \   o ^     玞 Ԃ       
+       
     }
 }

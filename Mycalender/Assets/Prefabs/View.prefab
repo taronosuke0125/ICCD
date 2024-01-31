@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 8433996595806751052}
   - component: {fileID: 8581607158915929546}
   - component: {fileID: 5519619233691082884}
-  - component: {fileID: 8495288230548703584}
+  - component: {fileID: 5572436066830982224}
   m_Layer: 5
   m_Name: InputField (Legacy)
   m_TagString: Untagged
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_OnDidEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8495288230548703584}
+      - m_Target: {fileID: 5572436066830982224}
         m_TargetAssemblyTypeName: Viewtext, Assembly-CSharp
         m_MethodName: InputText
         m_Mode: 1
@@ -309,7 +309,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8495288230548703584}
+      - m_Target: {fileID: 5572436066830982224}
         m_TargetAssemblyTypeName: Viewtext, Assembly-CSharp
         m_MethodName: InputText
         m_Mode: 1
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
---- !u!114 &8495288230548703584
+--- !u!114 &5572436066830982224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,7 +338,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7003586641921483107}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b19a315b5ec35241b5ebe9fe59541ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 91366635f119f634e8aee1affb49e31c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputField: {fileID: 5519619233691082884}

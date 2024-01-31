@@ -10,11 +10,16 @@ public class Updater : MonoBehaviour
     public Text Nametext;
     public Text Timetext;
 
+
+
     private void Start()
     {
         Debug.Log(this.GetComponent<DetailNumber>().detailnumber);
         Data p = PlanList.DataList[this.GetComponent<DetailNumber>().detailnumber];
         Nametext.text = p.Name;
-        Timetext.text = p.Start.ToString("yyyy/MM/dd");
+        string s = p.Startstr.Substring(12, 5);
+        string f = p.Finishstr.Substring(12, 5);
+        Timetext.text = s + "～" + f;
+        this.name = p.Name;
     }
 }

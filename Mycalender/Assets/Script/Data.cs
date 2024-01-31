@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Globalization;
 
-//ï¿½\ï¿½ï¿½Ì\ï¿½ï¿½ï¿½ï¿½Data
+//—\’è‚Ì\‘¢‘ÌData
 public class Data
 {
     public string Name;
@@ -12,14 +12,12 @@ public class Data
     public string Finishstr;
     public DateTime Start;
     public DateTime Finish;
-
     public string memo;
-
     public void view()
     {
         Debug.Log("Name:" + Name + ",Start:"+Start+"Finish:"+Finish);
     }
-    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½DateTimeï¿½^ï¿½É•ÏŠï¿½,1/21ï¿½Xï¿½V
+    //•¶š—ñ‚ğDateTimeŒ^‚É•ÏŠ·,1/21XV
     public void IntToString()
     {
         CultureInfo provider = CultureInfo.InvariantCulture;
