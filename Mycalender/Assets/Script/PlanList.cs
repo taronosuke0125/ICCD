@@ -7,7 +7,6 @@ public class PlanList : MonoBehaviour
 {
     public static Data[] DataList=new Data[99];//—\’è‚ÌƒŠƒXƒg
     public static int datacount;//—\’è‚ÌŒÂ”
-   
     public static void LoadPlan()
     {
         string datastr = "";

@@ -56,6 +56,8 @@ public class decidebutton : MonoBehaviour
         schedule.Name = setstartday.planname;
         schedule.Startstr = start.ToString("yyyy/MM/dd/ HH:mm:ss");
         schedule.Finishstr = finish.ToString("yyyy/MM/dd/ HH:mm:ss");
+        //nagi edited
+        schedule.memo = GameObject.Find("InputField").GetComponent<Memoedit>().smemo;
         string jsonschedule = JsonUtility.ToJson(schedule);
         int count = 0;
         //ファイルのパス

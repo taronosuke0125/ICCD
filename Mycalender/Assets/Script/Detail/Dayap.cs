@@ -11,7 +11,7 @@ public class Dayap : MonoBehaviour
      public Text Daytext;
     void Start()
     {
-        Daytext.text = CreateDate.ToDate.ToString();
+        Daytext.text = CreateDate.ToDate.ToString("yyyy/MM/dd");
     }
 
     // Update is called once per frame
