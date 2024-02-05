@@ -5,11 +5,11 @@ using TMPro;
 
 public class InputPlantitle : MonoBehaviour
 {
-    public static TMP_InputField Name;
+    [SerializeField]
+    public TMP_InputField Name;
     public static string staticname;
     private void Start()
     {
-        Name = GameObject.Find("InputPlanName").GetComponent<TMP_InputField>();
         Name.text = staticname;
     }
     //Inputbox‚Å•¶Žš‚ð“ü—Í‚µ‚½‚çplanname‚É•Û‘¶

@@ -19,8 +19,12 @@ public class PlanPresetList:MonoBehaviour
         if (onceflag)
         {
             morningcn=LoadPreset(morning, "morning.json");
-            Debug.Log("loaded");
-            ViewPlan(morning);            
+            ViewPlan(morning);
+            lunchcn = LoadPreset(lunch, "lunch.json");
+            ViewPlan(lunch);
+            dinnercn = LoadPreset(dinner, "lunch.json");
+            ViewPlan(dinner);
+            onceflag = false;
         }
         
     }
@@ -30,13 +34,13 @@ public class PlanPresetList:MonoBehaviour
         string datastr = "";
         StreamReader reader;
         //読み取り場所を指定
-        Debug.Log(Application.dataPath + "/" + filename);
         reader = new StreamReader(Application.dataPath+"/"+filename);
         int datacount = 0;
-        while (reader.Peek() != -1)
+        
+        while (!reader.EndOfStream)
         {
-            datastr = "{"+reader.ReadLine()+"}";//一行ずつ読む
-            Debug.Log(datastr);
+            datastr = reader.ReadLine();//一行ずつ読む
+            datastr = "{" + datastr + "}";
             //一行目はタグなので保存しない
             if (datacount == 0)
             {
@@ -46,6 +50,7 @@ public class PlanPresetList:MonoBehaviour
             p[datacount-1] = JsonConvert.DeserializeObject<PlanPreset>(datastr);//予定プリセットを予定プリセットリストに登録
             datacount++;
         }
+        p[datacount-1]=null;
         reader.Close();
         //配列の要素数を返す
         return datacount-1;
@@ -54,10 +59,9 @@ public class PlanPresetList:MonoBehaviour
     public static void ViewPlan(PlanPreset[] p)
     {
         Debug.Log("veiw all preset");
-        int i = 0;
-        while (p[i] != null)
+        int i;
+        for(i=0; p[i]!= null; i++)
         {
-            Debug.Log("i" + i);
             p[i].view();
         }
     }

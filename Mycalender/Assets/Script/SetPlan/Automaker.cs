@@ -6,8 +6,8 @@ using System.IO;
 
 public class Automaker : MonoBehaviour
 {
-    [SerializeField] TMP_Dropdown dropdown; 
-     
+    [SerializeField] TMP_Dropdown dropdown;
+    [SerializeField] TMP_InputField InputField;
     //自動作成ボタンに
     public void MakeAuto()
     {
@@ -17,35 +17,38 @@ public class Automaker : MonoBehaviour
             return;
         }
         int index = dropdown.value;  // Dropdownの現在の値を取得
-        string jsonfile ="";
+        int imax;//プリセットの要素数
+        PlanPreset[] plist;//プリセットの配列
+        //indexの値によって朝、昼、夜どの献立を呼び出すか指定
         switch (index)
         {
             case 0:
-                jsonfile = "morning.json";
+                imax = PlanPresetList.morningcn;
+                plist = PlanPresetList.morning;
                 break;
             case 1:
-                jsonfile = "lunch.json";
+                imax = PlanPresetList.lunchcn;
+                plist = PlanPresetList.lunch;
                 break;
             case 2:
-                jsonfile = "dinner.json";
+                imax = PlanPresetList.dinnercn;
+                plist = PlanPresetList.dinner;
+                break;
+            default:
+                imax = 0;
+                plist = null;
                 break;
         }
-        string path = Path.Combine(Application.dataPath, jsonfile);
-        // JSONファイルを読み込む
-        string json = File.ReadAllText(path);
-
-        // JSONデータをオブジェクトに変換
-        Data[] dataArray = JsonUtility.FromJson<Data[]>(json);
-
         // 1から100の間でランダムなIDを生成
-        int randomID = UnityEngine.Random.Range(1, 101);
+        int randomID = UnityEngine.Random.Range(1, imax);
 
         // ランダムなIDに対応する名前を取得
-        foreach (Data data in dataArray)
+        foreach (PlanPreset p in plist)
         {
-            if (1 == randomID)
+            if (p.ID==randomID)
             {
-                Debug.Log("Name of the random ID: " + data.Name);
+                InputField.text = p.name;
+                InputField.GetComponent<InputPlantitle>().EnteredPlanName();
                 break;
             }
         }
