@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 //追加する！
 using UnityEngine.UI;
-
+using TMPro;
 public class Viewtext : MonoBehaviour {
 
   //オブジェクトと結びつける
   public InputField inputField;
-  public Text text;
+  public TextMeshProUGUI text;
 
   void Start () {
     //Componentを扱えるようにする
         inputField = inputField.GetComponent<InputField> ();
-        text = text.GetComponent<Text> ();
+        text = text.GetComponent<TextMeshProUGUI> ();
         Data p = PlanList.DataList[transform.parent.parent.parent.gameObject.GetComponent<DetailNumber>().detailnumber];
         Debug.Log(p.memo);
         inputField.text = p.memo;

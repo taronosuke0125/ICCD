@@ -992,6 +992,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 413d88b64a086a748b7e5700cd87c2ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  morning_text: {fileID: 4900000, guid: 28d3d468f15824842901f64354f86c0d, type: 3}
+  lunch_text: {fileID: 4900000, guid: d1cf7fc69d47db84e975abecd5268fd3, type: 3}
+  dinner_text: {fileID: 4900000, guid: 74912bcd54630d84bb5832caccf158fc, type: 3}
 --- !u!1 &833217444
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,7 +1612,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0

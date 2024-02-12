@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using System;
 using UnityEngine.SceneManagement;
 public class CreateDate : MonoBehaviour
@@ -88,7 +89,7 @@ public class CreateDate : MonoBehaviour
                         GameObject planpanelobj = Instantiate(planpanel, planview.transform);
                         Debug.Log(planpanelobj.name);
                         //予定の名前,時間を記入
-                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        planpanelobj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text=PlanList.DataList[i].Name;
 
                         if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Finish.Date)
                         {
@@ -107,7 +108,7 @@ public class CreateDate : MonoBehaviour
                     {
                         GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
                         GameObject planpanelobj = Instantiate(planpanel, planview.transform);
-                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        planpanelobj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = PlanList.DataList[i].Name;
                     }
                 }
             }
@@ -127,7 +128,7 @@ public class CreateDate : MonoBehaviour
                     {
                         GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
                         GameObject planpanelobj = Instantiate(planpanel, planview.transform);
-                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        planpanelobj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = PlanList.DataList[i].Name;
                         //場合分けを3パターンに増加(1/28)
                         if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Start.Date && SelectDate.Date.AddDays(j) == PlanList.DataList[i].Finish.Date)
                         {
@@ -157,7 +158,7 @@ public class CreateDate : MonoBehaviour
                     {
                         GameObject planview = this.transform.GetChild(j).GetChild(0).GetChild(2).gameObject;
                         GameObject planpanelobj = Instantiate(planpanel, planview.transform);
-                        planpanelobj.transform.GetChild(0).GetComponent<Text>().text = PlanList.DataList[i].Name;
+                        planpanelobj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = PlanList.DataList[i].Name;
                         if (SelectDate.Date.AddDays(j) == PlanList.DataList[i].Start.Date)
                         {
                             planpanelobj.transform.GetChild(1).GetComponent<Text>().text = PlanList.DataList[i].Start.ToString("HH:mm") + "～";

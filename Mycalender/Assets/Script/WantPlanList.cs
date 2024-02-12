@@ -8,13 +8,16 @@ public class WantPlanList : MonoBehaviour
 {
     public static WantData[] WantDataList = new WantData[99];//やりたいことのリスト
     public static int wantdatacount;//やりたいことの個数
-
     public static void LoadWantPlan()
     {
         string datastr = "";
         StreamReader reader;
+        if (!File.Exists(Application.persistentDataPath + "/savewantdata.json"))
+        {
+            //やりたいことファイルがない場合は作成
+            System.IO.File.CreateText(Application.persistentDataPath + "/savewantdata.json").Close();
+        }
         //読み取り場所を指定
-        Debug.Log(Application.persistentDataPath);
         reader = new StreamReader(Application.persistentDataPath + "/savewantdata.json");
         wantdatacount = 0;
         while (reader.Peek() != -1)

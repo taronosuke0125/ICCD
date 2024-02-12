@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
+using TMPro;
 public class GenerateWantPlanBox : MonoBehaviour
 {
     public GameObject canvas;
@@ -15,7 +14,7 @@ public class GenerateWantPlanBox : MonoBehaviour
         {
             GameObject planbox = Instantiate(prefab, canvas.transform);
             planbox.GetComponent<WantDetailNumber>().wantdetailnumber = i;
-            planbox.transform.GetChild(1).GetComponent<Text>().text = WantPlanList.WantDataList[i].Name;
+            planbox.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = WantPlanList.WantDataList[i].Name;
             Debug.Log("this Detail Number:" + planbox.GetComponent<WantDetailNumber>().wantdetailnumber);
         }
     }

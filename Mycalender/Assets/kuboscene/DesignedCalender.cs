@@ -14,7 +14,6 @@ public class DesignedCalendar : MonoBehaviour
     private DateTime SelectDate;
     private DateTime D_Date;
     private int startdate;
-
    // 追加: 保存するための変数(makecalender.csでいうChangeDate)
     public static DateTime selectedDate;
 
@@ -39,7 +38,9 @@ public class DesignedCalendar : MonoBehaviour
 
         SelectDate = DateTime.Now;
         CalendarController();
-
+        //キャンセル用のボタンクリックイベント
+        Button cancelbutton = GameObject.Find("Button").GetComponent<Button>();
+        cancelbutton.onClick.AddListener(()=> { set_Date(selectedDate, startday.changeflug); });
         // 追加: 翌月に移動するボタンのクリックイベント
         Button nextMonthButton = GameObject.Find("NextMonthButton").GetComponent<Button>();
         nextMonthButton.onClick.AddListener(MoveToNextMonth);
@@ -176,6 +177,16 @@ public class DesignedCalendar : MonoBehaviour
             SceneManager.LoadScene("WantSet");
 
     }
+    //キャンセル用のメソッド(オーバーライド)
+    void set_Date(int number)
+    {
+        if (number < 4)
+            SceneManager.LoadScene("SetPlan");
+        else
+            SceneManager.LoadScene("WantSet");
+
+    }
+
 
     // 翌月に移動するメソッド
     void MoveToNextMonth()

@@ -13,6 +13,12 @@ public class PlanList : MonoBehaviour
         StreamReader reader;
         //読み取り場所を指定
         Debug.Log(Application.persistentDataPath);
+        if(!File.Exists(Application.persistentDataPath + "/savedata.json"))
+        {
+            //予定ファイルがない場合は作成
+            System.IO.File.CreateText(Application.persistentDataPath + "/savedata.json").Close();
+        }
+
         reader = new StreamReader(Application.persistentDataPath + "/savedata.json");
         datacount = 0;
         while (reader.Peek() != -1)

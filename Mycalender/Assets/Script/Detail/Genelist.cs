@@ -53,7 +53,7 @@ public class Genelist : MonoBehaviour
             Transform t = obj2.transform;
             Vector3 pos=t.position;
             pos.x-=0.2f;
-            pos.y-=4.3f;
+            pos.y-=100f;
             t.position =pos;
         }
     }

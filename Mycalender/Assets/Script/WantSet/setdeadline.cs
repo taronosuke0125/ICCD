@@ -31,9 +31,9 @@ public class setdeadline : MonoBehaviour
                 this.transform.GetChild(1).GetComponent<Text>().text = p1.DeadLine.ToString("yyyy/MM/dd");
                 //時間表示を変更前のものに変更、DeadLine以外はTimeSpan型
                 WantTimeText.deadlinetime = p1.DeadLine.ToString("HH:mm");
-                WantTimeText.term = p1.Termstr;
-                WantTimeText.min = p1.minstr;
-                WantTimeText.max = p1.maxstr;
+                WantTimeText.term = int.Parse(p1.Termstr);
+                WantTimeText.min = int.Parse(p1.minstr);
+                WantTimeText.max = int.Parse(p1.maxstr);
                 break;
             default:
                 //登録シーンに最初に遷移した際に呼び出される

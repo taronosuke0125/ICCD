@@ -12,32 +12,36 @@ public class PlanPresetList:MonoBehaviour
     public static int lunchcn;
     public static PlanPreset[] dinner = new PlanPreset[60];
     public static int dinnercn;
+    //予定プリセットが入ったテキストファイル
+    public TextAsset morning_text;
+    public TextAsset lunch_text;
+    public TextAsset dinner_text;
     private static bool onceflag = true;
     private void Start()
     {
         //プログラム中一回だけ実行
         if (onceflag)
         {
-            morningcn=LoadPreset(morning, "morning.json");
+            morningcn=LoadPreset(morning, morning_text);
             ViewPlan(morning);
-            lunchcn = LoadPreset(lunch, "lunch.json");
+            lunchcn = LoadPreset(lunch, lunch_text);
             ViewPlan(lunch);
-            dinnercn = LoadPreset(dinner, "lunch.json");
+            dinnercn = LoadPreset(dinner, dinner_text);
             ViewPlan(dinner);
             onceflag = false;
         }
         
     }
-    //保存先の配列とそのファイル名を引数に指定し、追加した要素数を返すメソッド
-    public static int LoadPreset(PlanPreset[] p, string filename)
+    //保存先の配列と元のテキストファイルを引数に指定し、追加した要素数を返すメソッド
+    public static int LoadPreset(PlanPreset[] p, TextAsset dish_text)
     {
         string datastr = "";
-        StreamReader reader;
-        //読み取り場所を指定
-        reader = new StreamReader(Application.dataPath+"/"+filename);
+        //読み取るテキストを指定
+        StringReader reader = new StringReader(dish_text.text);
+        
         int datacount = 0;
         
-        while (!reader.EndOfStream)
+        while (reader.Peek() != -1)
         {
             datastr = reader.ReadLine();//一行ずつ読む
             datastr = "{" + datastr + "}";

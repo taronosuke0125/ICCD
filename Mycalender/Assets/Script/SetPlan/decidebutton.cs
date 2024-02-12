@@ -114,10 +114,10 @@ public class decidebutton : MonoBehaviour
         schedule.Name = setdeadline.wantplanname;
         Debug.Log(setdeadline.wantplanname);
         Debug.Log(schedule.Name);
-        schedule.Termstr = WantTimeText.term;
+        schedule.Termstr = WantTimeText.IntToTimeSpan(WantTimeText.term).ToString();
         schedule.DeadLinestr = deadline.ToString("yyyy/MM/dd/ HH:mm:ss");
-        schedule.maxstr=WantTimeText.max;
-        schedule.minstr = WantTimeText.min;
+        schedule.maxstr= WantTimeText.IntToTimeSpan(WantTimeText.max).ToString();
+        schedule.minstr = WantTimeText.IntToTimeSpan(WantTimeText.min).ToString();//読み込みでバグる
         string jsonschedule = JsonUtility.ToJson(schedule);
         int count = 0;
         //ファイルのパス
@@ -163,4 +163,6 @@ public class decidebutton : MonoBehaviour
         WantTimeText.deadlinetime = "00:00";
         
     }
+
+   
 }
